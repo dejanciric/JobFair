@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> Student
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="routing('/companyRegistration')"> Company
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="option3" autocomplete="off" (click)="routing('/adminRegistration')"> Admin
+        </label>
+      </div>
+  <div class="card card-container">
+    
+      <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+      <img class="mx-auto d-block" id="profile-img"  src="../../assets/img/logo.png" width="300px"/>
+      <p id="profile-name" class="profile-name-card"></p>
+      <form class="form-signin">
+
+          <table  align="center">
+              <tr>
+                <td style="padding-right:15px">
+                    <input type="text" id="inputEmail" [(ngModel)]='username' name='username' class="form-control" placeholder="Username" required autofocus>
+                    <div style="color:red;  margin: 5px">
+                      {{usernameMessage}}
+                    </div>
+                </td>
+                <td style="padding-left:15px">
+                    <input type="text" [(ngModel)]='firstname' name='firstname' id="inputPassword" class="form-control" placeholder="First Name" required>
+                    <p style="color:red; margin: 5px">
+                      {{firstnameMessage}}
+                    </p>
+                </td>
+              </tr>
+              <tr>
+                  <td style="padding-right:15px">
+                      <input type="password" [(ngModel)]='password' name='password' id="inputPassword" class="form-control" placeholder="Password" required>
+                      <p style="color:red; margin: 5px">
+                        {{passwordMessage}}
+                      </p>
+                  </td>
+                  <td style="padding-left:15px">
+                      <input type="text" [(ngModel)]='lastname' name='lastname' id="inputPassword" class="form-control" placeholder="Last Name" required>
+                      <p style="color:red; margin: 5px">
+                        {{lastnameMessage}}
+                      </p>
+                  </td>
+                </tr>
+                <tr>
+                    <td style="padding-right:15px">
+                        <input type="password" [(ngModel)]='passwordConfirm' name='passwordConfirm' id="inputPassword" class="form-control" placeholder="Confirm Password" required>
+                        <p style="color:red; margin: 5px">
+                          {{passwordConfirmMessage}}
+                        </p>
+                    </td>
+                    <td style="padding-left:15px">
+                        <input type="text" [(ngModel)]='year' name='year' id="inputPassword" class="form-control" placeholder="Year of study" required>
+                        <p style="color:red; margin: 5px">
+                          {{yearMessage}}
+                        </p>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td style="padding-right:15px">
+                          <input type="text" [(ngModel)]='phone' name='phone' id="inputPassword" class="form-control" placeholder="Phone number" required>
+                          <p style="color:red; margin: 5px">
+                            {{phoneMessage}}
+                          </p>
+                      </td>
+                      <td style="padding-left:15px">
+                          <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="customFile">
+                              <label class="custom-file-label" for="customFile">Choose file</label>
+                          </div>
+
+                        
+                      </td>
+                    </tr>
+  
+                      <tr>
+                          <td style="padding-right:15px">
+                              <input type="text" [(ngModel)]='mail' name='mail' id="inputPassword" class="form-control" placeholder="E-mail address" required>
+                          <p style="color:red; margin: 5px">
+                            {{mailMessage}}
+                          </p>
+                          </td>
+                          <td style="padding-left:40px">
+                              <div class="custom-control custom-switch">
+                                  <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]='graduated' name='graduated'>
+                                  <label class="custom-control-label" for="customSwitch1">Graduated</label>
+                                </div>
+                            
+                          </td>
+                        </tr>
+
+            </table>
+
+          <button class="btn btn-sm btn-primary btn-block btn-signin" style=" margin-top:30px"type="submit" (click)="register()">Register</button>
+          <a routerLink="/login" class="forgot-password">
+            Login
+        </a>
+        </form><!-- /form -->
+
+  </div><!-- /card-container -->
+
+
+
+</div><!-- /container -->

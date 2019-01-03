@@ -1,0 +1,41 @@
+
+<div class="container" >
+  <div class="card card-container">
+      <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+      <img id="profile-img"  src="../../assets/img/logo.png" />
+      <p id="profile-name" class="profile-name-card"></p>
+      <form class="form-signin">
+          
+          <input type="text" id="inputEmail" [(ngModel)]='username' name='username' class="form-control" placeholder="Username" required autofocus>
+          <div style="color:red;  margin: 5px">
+            {{usernameMessage}}
+          </div>
+          <input type="password" [(ngModel)]='password' name='password' id="inputPassword" class="form-control" placeholder="Password" required>
+          <p style="color:red; margin: 5px">
+            {{passwordMessage}}
+          </p>
+          <div id="remember" class="checkbox">
+              <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+              </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="login()">Sign in</button>
+      </form><!-- /form -->
+
+      
+
+      <a routerLink="/passwordChange" class="forgot-password">
+          Forgot the password?
+      </a>
+
+      <a routerLink="/guest" class="forgot-guest">
+        Enter as a guest
+    </a>
+  </div><!-- /card-container -->
+  <div class="card card-container">
+    <button class="btn btn-lg btn-primary btn-block btn-reg" type="submit" (click)="registration()">Sign up</button>
+
+</div><!-- /card-container -->
+
+
+</div><!-- /container -->
