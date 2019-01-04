@@ -16,6 +16,9 @@ import { GuestComponent } from './guest/guest.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CompanyRegistrationComponent } from './company-registration/company-registration.component';
 import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { OffersComponent } from './offers/offers.component';
+import { OfferDetailComponent } from './offer-detail/offer-detail.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { AdminRegistrationComponent } from './admin-registration/admin-registrat
     RegistrationComponent,
     GuestComponent,
     CompanyRegistrationComponent,
-    AdminRegistrationComponent
+    AdminRegistrationComponent,
+    CompanyDetailsComponent,
+    OffersComponent,
+    OfferDetailComponent
   ],
   imports: [
     BrowserModule,

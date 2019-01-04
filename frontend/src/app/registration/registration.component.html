@@ -69,7 +69,7 @@
                       </td>
                       <td style="padding-left:15px">
                           <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile">
+                              <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
                               <label class="custom-file-label" for="customFile">Choose file</label>
                           </div>
 

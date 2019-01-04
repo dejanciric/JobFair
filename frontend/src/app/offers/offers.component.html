@@ -1,0 +1,110 @@
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+        <a class="navbar-brand p-0 m-0"  routerLink="/guest">
+        <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo" >
+      </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class ="nav-item navbar-left">
+                <a class="nav-link text-light ml-3"  routerLink="/guest">Home</a>
+              </li>
+            </ul>
+    
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <a  class="nav-link text-light mr-1" routerLink="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="card">
+    
+                        <div class="card-body">
+                            <div class="card-title mb-4">
+                                <div class="d-flex justify-content-start">
+                                    <div class="image-container">
+                                        <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    </div>
+                                    <div class="userData ml-3">
+                                      <div class="h2 m-2">{{companyName}}</div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark mr-1 " routerLink="/companyDetails" >Basic Info</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" >Job Offers</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content ml-1" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                            
+    
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                        <table class="table table-hover">
+                                                                <thead>
+                                                                  <tr>
+                                                                   
+                                                                    <th scope="col">Offer title</th>
+                                                                    <th scope="col">Type</th>
+                                                                    <th scope="col">Deadline</th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  <tr (click)="test(offer.id)" *ngFor="let offer of offers">
+                                                                  
+                                                                    <td>{{offer.title}}</td>
+                                                                    <td>{{offer.type}}</td>
+                                                                    <td>{{offer.deadline}}</td>
+                                                                  </tr>              
+                                                                </tbody>
+                                                              </table>
+                                                </div>
+                                              
+                                            </div>
+                                            <hr />
+    
+                                            
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <br/>
+        <br/>
+        <footer class="page-footer font-small bg-dark pt-4 mt-4">
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-sm-6"><a routerLink="/guest"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></a></div>
+                    <div class="col-sm-6">
+                        
+                            <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                                <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                            </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>

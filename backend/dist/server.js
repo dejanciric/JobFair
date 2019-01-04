@@ -17,6 +17,7 @@ connection.once('open', () => {
 });
 const router = express_1.default.Router();
 const user_1 = __importDefault(require("./models/user"));
+const offer_1 = __importDefault(require("./models/offer"));
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -27,13 +28,28 @@ router.route('/login').post((req, res) => {
             res.json(user);
     });
 });
-router.route('/loginAdmin').get((req, res) => {
-    user_1.default.find({ "type": "user" }, (err, user) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(user);
-    });
+router.route('/searchCompany').post((req, res) => {
+    let companyName = req.body.companyName;
+    let city = req.body.city;
+    let works = req.body.work;
+    var regexName = new RegExp('.*' + companyName + '.*');
+    var regexCity = new RegExp('.*' + city + '.*');
+    if (works != null) {
+        user_1.default.find({ "companyName": regexName, "city": regexCity, "type": "company", "work": { $in: works } }, (err, user) => {
+            if (err)
+                console.log(err);
+            else
+                res.json(user);
+        });
+    }
+    else {
+        user_1.default.find({ "companyName": regexName, "city": regexCity, "type": "company" }, (err, user) => {
+            if (err)
+                console.log(err);
+            else
+                res.json(user);
+        });
+    }
 });
 router.route('/register').post((req, res) => {
     let user = new user_1.default(req.body);
@@ -76,6 +92,15 @@ router.route('/findByUsername').post((req, res) => {
             res.json(user);
     });
 });
+router.route('/findOfferByCompany').post((req, res) => {
+    let companyUsername = req.body.companyUsername;
+    offer_1.default.find({ "companyUsername": companyUsername }, (err, user) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(user);
+    });
+});
 router.route('/changePassword').post((req, res) => {
     let username = req.body.username;
     let oldPassword = req.body.oldPassword;
@@ -89,6 +114,15 @@ router.route('/changePassword').post((req, res) => {
             res.json({ message: 'Password updated!' });
             //console.log("alo");
         }
+    });
+});
+router.route('/findOfferById').post((req, res) => {
+    let id = req.body.id;
+    offer_1.default.findOne({ "id": id }, (err, offer) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(offer);
     });
 });
 app.use('/', router);

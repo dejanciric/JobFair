@@ -21,6 +21,7 @@ connection.once('open', ()=>{
 const router = express.Router();
 
 import User from './models/user';
+import Offer from './models/offer';
 
 router.route('/login').post(
     (req, res)=>{
@@ -37,14 +38,28 @@ router.route('/login').post(
 
 
 
-router.route('/loginAdmin').get(
+router.route('/searchCompany').post(
     (req, res)=>{
+        let companyName = req.body.companyName;
+        let city = req.body.city;
+        let works:String[] = req.body.work;
 
-        User.find({"type":"user"},
-         (err,user)=>{
-            if(err) console.log(err);
-            else res.json(user);
-        })
+        var regexName = new RegExp('.*'+companyName+'.*');
+        var regexCity = new RegExp('.*'+city + '.*');
+        if (works != null){
+            User.find({"companyName": regexName, "city":regexCity,"type":"company", "work":{$in:works}},
+            (err,user)=>{
+               if(err) console.log(err);
+               else res.json(user);
+           })
+        }else{
+            User.find({"companyName": regexName, "city":regexCity,"type":"company"},
+            (err,user)=>{
+               if(err) console.log(err);
+               else res.json(user);
+           })   
+        }
+
     }
 );
 
@@ -95,6 +110,17 @@ router.route('/findByUsername').post(
     }
 );
 
+router.route('/findOfferByCompany').post(
+    (req, res)=>{
+        let companyUsername = req.body.companyUsername;
+        Offer.find({"companyUsername":companyUsername},
+         (err,user)=>{
+            if(err) console.log(err);
+            else res.json(user);
+        })
+    }
+);
+
 router.route('/changePassword').post(
     (req, res)=>{
         let username = req.body.username;
@@ -115,7 +141,16 @@ router.route('/changePassword').post(
     }
 );
 
-
+router.route('/findOfferById').post(
+    (req, res)=>{
+        let id = req.body.id;
+        Offer.findOne({"id":id},
+         (err,offer)=>{
+            if(err) console.log(err);
+            else res.json(offer);
+        })
+    }
+);
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

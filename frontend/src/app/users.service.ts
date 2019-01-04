@@ -92,4 +92,6 @@ export class UsersService {
 
     return this.http.post(`${this.uri}/register`, data);
   }
+
+
 }

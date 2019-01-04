@@ -9,6 +9,9 @@ import { GuestComponent } from './guest/guest.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CompanyRegistrationComponent } from './company-registration/company-registration.component';
 import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { OffersComponent } from './offers/offers.component';
+import { OfferDetailComponent } from './offer-detail/offer-detail.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -20,6 +23,9 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'companyRegistration', component: CompanyRegistrationComponent},
   {path: 'adminRegistration', component: AdminRegistrationComponent},
+  {path: 'companyDetails', component: CompanyDetailsComponent},
+  {path: 'offers', component: OffersComponent},
+  {path: 'offerDetails', component: OfferDetailComponent},
   {path: '', component: LoginComponent},
 ];
 

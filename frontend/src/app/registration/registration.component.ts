@@ -161,4 +161,8 @@ export class RegistrationComponent implements OnInit {
       return flag;
   }
 
+  onFileSelected(event){
+    console.log(event); 
+  }
+
 }
