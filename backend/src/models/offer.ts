@@ -15,6 +15,9 @@ let Offer = new Schema({
     content: {
         type: String
     },
+    companyName: {
+        type: String
+    },
     companyUsername: {
         type: String
     },

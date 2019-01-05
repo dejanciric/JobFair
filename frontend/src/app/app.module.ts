@@ -22,6 +22,8 @@ import { OfferDetailComponent } from './offer-detail/offer-detail.component';
 import { StudentOffersComponent } from './student-offers/student-offers.component';
 import { ApplyComponent } from './apply/apply.component';
 import { ResultsComponent } from './results/results.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { ResultsComponent } from './results/results.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModule,
     HttpClientModule
   ],
   providers: [UsersService],

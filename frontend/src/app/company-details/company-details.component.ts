@@ -31,11 +31,13 @@ export class CompanyDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.imageuser=this.userService.getImage();
-    this.username = this.service.companyUsernameForDetails;
-    this.service.findByUsername(this.username).subscribe((user:User)=>{
+  
+    this.companyName = this.service.companyName;
+    this.userService.findCompanyByName(this.companyName).subscribe((user:User)=>{
+      this.username = user.username;
       this.firstname = user.firstname;
       this.lastname = user.lastname;
-      this.companyName = user.companyName;
+      this.service.companyUsernameForDetails= user.username;
       this.city = user.city;
       this.address = user.address;
       this.PIB = user.PIB;
@@ -45,6 +47,7 @@ export class CompanyDetailsComponent implements OnInit {
       this.mail = user.mail;
       this.special = user.special;
       this.image = this.updatePath+user.image;
+     this.service.companyImage = user.image;
     })
   }
 

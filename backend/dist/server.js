@@ -23,6 +23,7 @@ let username = "";
 const user_1 = __importDefault(require("./models/user"));
 const offer_1 = __importDefault(require("./models/offer"));
 const cv_1 = __importDefault(require("./models/cv"));
+const employed_1 = __importDefault(require("./models/employed"));
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -39,7 +40,7 @@ router.route('/searchCompany').post((req, res) => {
     let works = req.body.work;
     var regexName = new RegExp('.*' + companyName + '.*');
     var regexCity = new RegExp('.*' + city + '.*');
-    if (works != null) {
+    if (works != null && works != undefined && works.length != 0) {
         user_1.default.find({ "companyName": regexName, "city": regexCity, "type": "company", "work": { $in: works } }, (err, user) => {
             if (err)
                 console.log(err);
@@ -243,6 +244,59 @@ router.route('/applyToOffer').post((req, res) => {
         }
         else {
             res.json({ message: 'Offer updated!' });
+            //console.log("alo");
+        }
+    });
+});
+router.route('/readMyOffers').post((req, res) => {
+    let username = req.body.username;
+    //let types:String[] = req.body.type;
+    offer_1.default.find({ "students": { $elemMatch: { "username": username } } }, (err, offer) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(offer);
+    });
+});
+router.route('/employ').post((req, res) => {
+    let employed = new employed_1.default(req.body);
+    employed.save().
+        then(employed => {
+        res.status(200).json({ 'employed': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'employed': 'no' });
+    });
+});
+router.route('/removeEmployed').post((req, res) => {
+    let username = req.body.username;
+    employed_1.default.findOneAndRemove({ 'username': username }, (err) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.json({ message: 'Employed Deleted!' });
+        }
+    });
+});
+router.route('/findEmployed').post((req, res) => {
+    let username = req.body.username;
+    employed_1.default.findOne({ "username": username }, (err, user) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(user);
+    });
+});
+router.route('/updateNum').post((req, res) => {
+    let companyName = req.body.companyName;
+    let employeeNumber = req.body.employeeNumber;
+    user_1.default.findOneAndUpdate({ 'companyName': companyName }, { 'employeeNumber': employeeNumber }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'COmpany updated!' });
             //console.log("alo");
         }
     });

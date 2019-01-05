@@ -86,9 +86,13 @@
                       
                       <div  class="col-sm-4">
                           Cover letter:
-                          <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="10" [(ngModel)]='cover' name='cover'></textarea>
-
+                          <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="8" [(ngModel)]='cover' name='cover'></textarea>
+                          <div class="custom-file mt-3">
+                              <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
+                              <label class="custom-file-label" for="customFile">Choose PDF</label>
+                          </div>
                       </div>
+                      
 
                     </div>
                     

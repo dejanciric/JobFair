@@ -28,6 +28,7 @@ let username = "";
 import User from './models/user';
 import Offer from './models/offer';
 import cv from './models/cv';
+import Employed from './models/employed';
 
 import { Request } from 'express-serve-static-core';
 
@@ -59,7 +60,7 @@ router.route('/searchCompany').post(
 
         var regexName = new RegExp('.*'+companyName+'.*');
         var regexCity = new RegExp('.*'+city + '.*');
-        if (works != null){
+        if (works != null &&  works!=undefined && works.length != 0){
             User.find({"companyName": regexName, "city":regexCity,"type":"company", "work":{$in:works}},
             (err,user)=>{
                if(err) console.log(err);
@@ -309,6 +310,76 @@ router.route('/applyToOffer').post(
     }
 );
 
+router.route('/readMyOffers').post(
+    (req, res)=>{
+        let username = req.body.username;
+        //let types:String[] = req.body.type;
 
+        
+            Offer.find({"students":{$elemMatch:{"username":username}}},
+            (err,offer)=>{
+               if(err) console.log(err);
+               else res.json(offer);
+           })
+      
+    }
+);
+
+
+router.route('/employ').post((req, res)=>{
+    let employed = new Employed(req.body);
+    employed.save().
+        then(employed=>{
+            res.status(200).json({'employed':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'employed':'no'});
+        })
+});
+
+router.route('/removeEmployed').post((req, res)=>{
+    let username = req.body.username;
+    Employed.findOneAndRemove({'username':username}, (err)=>{
+        if (err){
+            res.send(err);
+           
+        }
+
+        else{
+            res.json({ message: 'Employed Deleted!'});
+           
+        }
+    })
+})
+
+router.route('/findEmployed').post(
+    (req, res)=>{
+        let username = req.body.username;
+        Employed.findOne({"username":username},
+         (err,user)=>{
+            if(err) console.log(err);
+            else res.json(user);
+        })
+    }
+);
+
+router.route('/updateNum').post(
+    (req, res)=>{
+        let companyName = req.body.companyName;
+        let employeeNumber = req.body.employeeNumber;
+
+        User.findOneAndUpdate({'companyName':companyName}, {'employeeNumber':employeeNumber}, (err)=>{
+            if (err){
+                res.send(err);
+               // console.log("error");
+            }
+    
+            else{
+                res.json({ message: 'COmpany updated!'});
+                //console.log("alo");
+            }
+        })
+
+    }
+);
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

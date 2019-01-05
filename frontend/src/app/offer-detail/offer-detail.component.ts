@@ -26,13 +26,7 @@ export class OfferDetailComponent implements OnInit {
 
   ngOnInit() {
     this.image=this.userService.getImage();
-    this.userService.findCompanyByName(this.companyName).subscribe((user:User)=>{
-      this.service.companyUsernameForDetails = user.username;
-      this.service.companyName = this.companyName;
-      this.service.companyImage = user.image;
-      this.router.navigate(['/companyDetails']);
-      
-    })
+
     this.service.findOfferById(this.service.selectedOfferId).subscribe((offer:Offer)=>{
       this.title = offer.title;
       this.type = offer.type;
@@ -42,6 +36,13 @@ export class OfferDetailComponent implements OnInit {
       this.service.findByUsername(this.companyUsername).subscribe((user:User)=>{
         this.companyName = user.companyName;
         this.city = user.city;
+        this.userService.findCompanyByName(this.companyName).subscribe((user:User)=>{
+          this.service.companyUsernameForDetails = user.username;
+          this.service.companyName = user.companyName;
+          this.service.companyImage = user.image;
+          //this.router.navigate(['/companyDetails']);
+          
+        })
       })
     })
 

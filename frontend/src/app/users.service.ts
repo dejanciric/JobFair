@@ -218,4 +218,42 @@ export class UsersService {
       return this.http.post(`${this.uri}/applyToOffer`, data);
     }
 
+    readMyOffers(username){
+      const data ={
+        username:username
+      }
+      return this.http.post(`${this.uri}/readMyOffers`, data);
+
+    }
+
+    findEmployed(username){
+      const data ={
+        username:username
+      }
+      return this.http.post(`${this.uri}/findEmployed`, data);
+    }
+    removeEmployed(username){
+      const data ={
+        username:username
+      }
+      return this.http.post(`${this.uri}/removeEmployed`, data);
+    }
+    employ(username, companyName, type, date){
+      const data ={
+        username:username,
+        companyName: companyName,
+        date: date,
+        type: type
+      }
+      return this.http.post(`${this.uri}/employ`, data);
+    }
+
+    updateNum(companyName, employeeNumber){
+      const data ={
+        companyName: companyName,
+        employeeNumber: employeeNumber
+      }
+      return this.http.post(`${this.uri}/updateNum`, data);
+    }
+
 }

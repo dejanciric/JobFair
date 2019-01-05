@@ -86,11 +86,14 @@
                         <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Search by job title" aria-label="Search" [(ngModel)]='title' name="title">
                       
                       
-                      <select class="custom-select m-3" multiple [(ngModel)]='type' name="type">
+                      <select class="custom-select m-3 w-75" multiple [(ngModel)]='type' name="type">
                           <option value="Full time">Full time</option>
                           <option value="Part time">Part time</option>
                           <option value="Internship">Internship</option> 
                         </select>
+                        
+                            
+
                         <button class="btn btn-dark m-3" (click)="search()">Search</button>
                       </form>
                      </div>
