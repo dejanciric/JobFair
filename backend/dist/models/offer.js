@@ -23,6 +23,9 @@ let Offer = new Schema({
     },
     deadline: {
         type: String
+    },
+    students: {
+        type: [{ "username": String, "firstname": String, "lastname": String, "result": String }]
     }
 });
 exports.default = mongoose_1.default.model('Offer', Offer);

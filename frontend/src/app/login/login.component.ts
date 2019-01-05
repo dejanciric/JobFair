@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: UsersService, private router: Router) { }
 
   ngOnInit() {
+    this.service.user=false;
   }
 
   registration(){
@@ -40,6 +41,9 @@ export class LoginComponent implements OnInit {
     //console.log(this.username);
     this.service.login(this.username, this.password).subscribe((user: User)=>{
       if(user){
+        this.service.user=true;
+        this.service.loggedUsername = this.username;
+        this.service.loggedImage = user.image;
         if(user.type=='student') this.router.navigate(['/student']);
         else if(user.type == 'company') this.router.navigate(['/company'])
         else{
@@ -51,4 +55,6 @@ export class LoginComponent implements OnInit {
      
     })
   }
+
+
 }

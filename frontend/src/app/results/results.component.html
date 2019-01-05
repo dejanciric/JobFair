@@ -1,0 +1,423 @@
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+    
+    <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo">
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a  class="nav-link text-light m-2" routerLink="/student">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a  class="nav-link text-light m-2" routerLink="/guest">Companies</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a  class="nav-link text-light m-2" routerLink="/studentOffers">Offers</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a  class="nav-link text-light m-2" routerLink="/results">Application results</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+                <img class="p-0 m-2 rounded" [src]="image" height="40" >
+            </li>
+            
+            <li class="nav-item dropdown">
+                <a  class="nav-link text-light m-2" routerLink="/login">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="padding:10px;margin:20px; margin-right:30px;text-align:center;border-width: 5px">
+                    <div class="card-header">
+                        <h4>
+                            <strong>
+                           Applications
+                           </strong>
+                         
+                        </h4>
+                    </div>
+                    <div class="card-body" align="center">
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                          <button class="btn btn-dark" (click)="toggle('personalInfo')">Personal Information</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-12 mb-3">
+                            <button class="btn btn-dark" (click)="toggle('typeOfApplication')">Type of application</button>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                              <button class="btn btn-dark" (click)="toggle('education')">Education</button>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-12 mb-3">
+                                <button class="btn btn-dark" (click)="toggle('workExperience')">Work Experience</button>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mb-3" >
+                                  <button class="btn btn-dark" (click)="toggle('languages')">Languages</button>
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-12 mb-3">
+                                    <button class="btn btn-dark" (click)="toggle('additionalSkills')">Additional skills</button>
+                                  </div>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7" *ngIf="personalInfo">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    <form class="form-group md-form form-sm">
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="First Name" [(ngModel)]='firstname' name="firstname" [value]="firstname">
+                      
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Last Name" [(ngModel)]='lastname' name="lastname" [value]="lastname">
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Street Address" [(ngModel)]='address' name="address" [value]="address">
+                        <div class ="row">
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Postal Code" [(ngModel)]='postcode' name="postcode" [value]="postcode">
+
+                          </div>
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="City" [(ngModel)]='city' name="city" [value]="city">
+
+                          </div>
+                        </div>
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Country" [(ngModel)]='country' name="country" [value]="country">
+                        <div class ="row">
+                            <div class="col-sm-3">
+                                <select class="custom-select m-3" [(ngModel)]='phoneType' name="phoneType">
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Work">Work</option>
+                                  </select> 
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-sm m-3" [value]="phone" type="text" placeholder="Number" [(ngModel)]='phone' name="phone" [value]="phone">
+  
+                            </div>
+                          </div>
+                
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="E-mail address" aria-label="Search" [(ngModel)]='mail' name="mail" [value]="mail">
+                        
+                        <button class="btn btn-dark m-3" (click)="save('personalInfo')">Save</button>
+                      </form>
+                     </div>
+            </div>
+            <div class="col-sm-8" *ngIf="typeOfApplication">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    <form class="form-group md-form form-sm">
+                      <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group m-3">
+                                <label for="test">Type of application</label>
+                                <select id ="test" class="custom-select " [(ngModel)]='applicationType' name="applicationType">
+                                    <option value="Full time job">Full time job</option>
+                                    <option value="Part time job">Part time job</option>
+                                    <option value="Internship">Internship</option>
+                                  </select>                           
+                                </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-8">
+                              <div class="form-group m-3">
+                                  <label for="exampleFormControlTextarea2">Description</label>
+                                  <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" [(ngModel)]='description' name='description' [value]="description">
+    
+                                  </textarea>
+                                </div>
+                          </div>
+                        </div>
+                        
+                        
+                          
+                      
+                     <button class="btn btn-dark m-3" (click)="save('typeOfApplication')">Save</button>
+                      </form>
+                     </div>
+            </div>
+            <div class="col-sm-8" *ngIf="education">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    <div class ="row" *ngFor="let education of educations">
+                      <div class="col-sm-8" >
+                          <div class="card m-3">
+                              <div class="row">
+                                
+                                <div class="col-sm-6">
+                                 <p *ngIf="!education.editing"> <b>From:</b> {{education.from}}</p>
+                                  <input *ngIf="education.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="From (DD/MM/YYYY)" [(ngModel)]='education.from' name="education.from" [value]="education.from">
+                                </div>
+                                <div class="col-sm-6">
+                                  <p *ngIf="!education.editing"><b>To:</b> {{education.to}}</p>
+                                  <input *ngIf="education.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="To (DD/MM/YYYY)"  [(ngModel)]='education.to' name="education.to" [value]="education.to">
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                    <p *ngIf="!education.editing"><b>Name:</b> {{education.name}}</p>
+                                    <input *ngIf="education.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="Name" [(ngModel)]='education.name' name="education.name" [value]="education.name" >
+
+                                  </div>
+                                  
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                     <p *ngIf="!education.editing"><b>City:</b> {{education.city}}</p>
+                                     <input *ngIf="education.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="City" [(ngModel)]='education.city' name="education.city" [value]="education.city" >
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <p *ngIf="!education.editing"><b>Country:</b> {{education.country}}</p>
+                                      <input *ngIf="education.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="Country"  [(ngModel)]='education.country' name="education.country" [value]="education.country">
+
+                                      </div>
+                                  </div>
+                            </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <button *ngIf="!education.editing" class="btn btn-success mt-3" (click)="editEducation(education)">Edit</button>
+                          <button *ngIf="education.editing" class="btn btn-warning mt-3" (click)="editSave(education)">Save</button>
+                      </div>
+                    </div>
+                  
+                    <form class="form-group md-form form-sm">
+                        <div class ="row">
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="From (DD/MM/YYYY)" [(ngModel)]='educationFrom' name="educationFrom" >
+
+                          </div>
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="To (DD/MM/YYYY)"  [(ngModel)]='educationTo' name="educationTo">
+
+                          </div>
+
+                        </div>
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Name" [(ngModel)]='educationName' name="educationName" >
+                        <div class ="row">
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="City" [(ngModel)]='educationCity' name="educationCity" >
+  
+                            </div>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Country"  [(ngModel)]='educationCountry' name="educationCountry">
+  
+                            </div>
+  
+                          </div>
+                          <button class="btn btn-danger m-3" (click)="addEducation()">Add</button>
+                          <br>
+                        <button class="btn btn-dark m-3" (click)="save('education')">Save</button>
+                      </form>
+                     </div>
+            </div>
+            <div class="col-sm-8" *ngIf="workExperience">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    <div class ="row" *ngFor="let work of works">
+                      <div class="col-sm-8" >
+                          <div class="card m-3">
+                              <div class="row">
+                                
+                                <div class="col-sm-6">
+                                 <p *ngIf="!work.editing"> <b>From:</b> {{work.from}}</p>
+                                  <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="From (DD/MM/YYYY)" [(ngModel)]='work.from' name="work.from" [value]="work.from">
+                                </div>
+                                <div class="col-sm-6">
+                                  <p *ngIf="!work.editing"><b>To:</b> {{work.to}}</p>
+                                  <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="To (DD/MM/YYYY)"  [(ngModel)]='work.to' name="work.to" [value]="work.to">
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                    <p *ngIf="!work.editing"><b>Position:</b> {{work.position}}</p>
+                                    <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="Name" [(ngModel)]='work.position' name="work.position" [value]="work.position" >
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                    <p *ngIf="!work.editing"><b>Company Name:</b> {{work.name}}</p>
+                                    <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="Name" [(ngModel)]='work.name' name="work.name" [value]="work.name" >
+
+                                  </div>
+                                  
+                                  
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                     <p *ngIf="!work.editing"><b>City:</b> {{work.city}}</p>
+                                     <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="City" [(ngModel)]='work.city' name="work.city" [value]="work.city" >
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <p *ngIf="!work.editing"><b>Country:</b> {{work.country}}</p>
+                                      <input *ngIf="work.editing" class="form-control form-control-sm m-3 w-75" type="text" placeholder="Country"  [(ngModel)]='work.country' name="work.country" [value]="work.country">
+
+                                      </div>
+                                  </div>
+                            </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <button *ngIf="!work.editing" class="btn btn-success mt-3" (click)="editWork(work)">Edit</button>
+                          <button *ngIf="work.editing" class="btn btn-warning mt-3" (click)="editSaveWork(work)">Save</button>
+                      </div>
+                    </div>
+                  
+                    <form class="form-group md-form form-sm">
+                        <div class ="row">
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="From (DD/MM/YYYY)" [(ngModel)]='workFrom' name="workFrom" >
+
+                          </div>
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="To (DD/MM/YYYY)"  [(ngModel)]='workTo' name="workTo">
+
+                          </div>
+
+                        </div>
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Position" [(ngModel)]='workPosition' name="workPosition" >
+                        <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Company Name" [(ngModel)]='workCompanyName' name="workCompanyName" >
+                        <div class ="row">
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="City" [(ngModel)]='workCity' name="workCity" >
+  
+                            </div>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Country"  [(ngModel)]='workCountry' name="workCountry">
+  
+                            </div>
+  
+                          </div>
+                          <button class="btn btn-danger m-3" (click)="addWork()">Add</button>
+                          <br>
+                        <button class="btn btn-dark m-3" (click)="save('work')">Save</button>
+                      </form>
+                     </div>
+            </div>
+            <div class="col-sm-8" *ngIf="languages">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    
+                    <form class="form-group md-form form-sm">
+                        <hr>
+                      <div class="row">
+                        <div class="col-sm-5">
+                          
+                              <span class="ml-3">Language #1</span> <br>
+                              <input class="form-control form-control-sm m-3 " type="text" placeholder="Name" aria-label="Search" [(ngModel)]='language1' name="language1" [value]="language1">
+
+                           </div>
+                        <div class="col-sm-5">  
+                          
+                                <label for="test">Level of proficiency</label>
+                                <select id ="test" class="custom-select " [(ngModel)]='language1knowladge' name="language1knowladge">
+                                    <option value="Basic">Basic(A)</option>
+                                    <option value="Independent">Independent (B)</option>
+                                    <option value="Proficient">Proficient (C)</option>
+                                  </select>                           
+                                
+                          </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5">
+                          
+                              <span class="ml-3">Language #2</span> <br>
+                              <input class="form-control form-control-sm m-3 " type="text" placeholder=Name" aria-label="Search" [(ngModel)]='language2' name="language2" [value]="language2">
+
+                           </div>
+                        <div class="col-sm-5">  
+                          
+                                <label for="test">Level of proficiency</label>
+                                <select id ="test" class="custom-select " [(ngModel)]='language2knowladge' name="language2knowladge">
+                                    <option value="Basic">Basic(A)</option>
+                                    <option value="Independent">Independent (B)</option>
+                                    <option value="Proficient">Proficient (C)</option>
+                                  </select>                           
+                                
+                          </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5">
+                          
+                              <span class="ml-3">Language #3</span> <br>
+                              <input class="form-control form-control-sm m-3 " type="text" placeholder="Name" aria-label="Search" [(ngModel)]='language3' name="language3" [value]="language3">
+
+                           </div>
+                        <div class="col-sm-5">  
+                          
+                                <label for="test">Level of proficiency</label>
+                                <select id ="test" class="custom-select " [(ngModel)]='language3knowladge' name="language3knowladge">
+                                    <option value="Basic">Basic(A)</option>
+                                    <option value="Independent">Independent (B)</option>
+                                    <option value="Proficient">Proficient (C)</option>
+                                  </select>                           
+                                
+                          </div>
+                      </div>
+                       <button class="btn btn-dark m-3" (click)="save('language')">Save</button>
+                      </form>
+                     </div>
+            </div>
+            <div class="col-sm-8" *ngIf="additionalSkills">
+                <div class="jumbotron" style="padding:10px;margin:20px;">
+                    <h4 class="m-3">{{subtitle}}</h4>
+                    <form class="form-group md-form form-sm">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group m-3">
+                                    <label for="exampleFormControlTextarea2">Additional Skills</label>
+                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="5" [(ngModel)]='additionalSkillsText' name='additionalSkillsText' [value]="additionalSkillsText">
+      
+                                    </textarea>
+                                  </div>
+                            </div>
+                          </div>
+                          <button class="btn btn-dark m-3" (click)="search()">Search</button>
+                      </form>
+                     </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <footer class="page-footer font-small bg-dark pt-4 mt-4">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></div>
+                <div class="col-sm-6">
+                    
+                        <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                            <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                        </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>

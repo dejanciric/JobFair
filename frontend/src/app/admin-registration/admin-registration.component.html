@@ -49,9 +49,12 @@
           </p>
         
           <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
               <label class="custom-file-label" for="customFile">Choose file</label>
           </div>
+          <p style="color:red; margin: 5px">
+              {{imageMessage}}
+            </p>
 
           <button class="btn btn-sm btn-primary btn-block btn-signin" style=" margin-top:30px"type="submit" (click)="register()">Register</button>
           <a routerLink="/login" class="forgot-password">

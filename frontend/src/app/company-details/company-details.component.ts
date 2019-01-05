@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { User } from '../user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-company-details',
@@ -21,10 +22,15 @@ export class CompanyDetailsComponent implements OnInit {
   work:String="";
   mail:String="";
   special:String="";
+  image:String ="";
 
-  constructor(private service:CompanyService) { }
+  imageuser:String="";
+
+  updatePath = "http://localhost:4000/uploads/";
+  constructor(private service:CompanyService, private userService:UsersService) { }
 
   ngOnInit() {
+    this.imageuser=this.userService.getImage();
     this.username = this.service.companyUsernameForDetails;
     this.service.findByUsername(this.username).subscribe((user:User)=>{
       this.firstname = user.firstname;
@@ -38,6 +44,7 @@ export class CompanyDetailsComponent implements OnInit {
       this.work = user.work;
       this.mail = user.mail;
       this.special = user.special;
+      this.image = this.updatePath+user.image;
     })
   }
 

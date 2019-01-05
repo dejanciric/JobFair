@@ -19,6 +19,9 @@ import { AdminRegistrationComponent } from './admin-registration/admin-registrat
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { OffersComponent } from './offers/offers.component';
 import { OfferDetailComponent } from './offer-detail/offer-detail.component';
+import { StudentOffersComponent } from './student-offers/student-offers.component';
+import { ApplyComponent } from './apply/apply.component';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { OfferDetailComponent } from './offer-detail/offer-detail.component';
     AdminRegistrationComponent,
     CompanyDetailsComponent,
     OffersComponent,
-    OfferDetailComponent
+    OfferDetailComponent,
+    StudentOffersComponent,
+    ApplyComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

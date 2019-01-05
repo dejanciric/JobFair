@@ -9,6 +9,7 @@ export class CompanyService {
 
   companyUsernameForDetails:String="";
   companyName:String="";
+  companyImage:String ="";
   selectedOfferId:String = "";
 
   constructor(private http: HttpClient) { }

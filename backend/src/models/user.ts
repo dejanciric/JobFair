@@ -54,6 +54,9 @@ let User = new Schema({
     },
     special: {
         type: String
+    },
+    image:{
+        type:String
     }
 });
 

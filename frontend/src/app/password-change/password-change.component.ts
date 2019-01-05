@@ -52,7 +52,7 @@ export class PasswordChangeComponent implements OnInit {
       this.newPasswordMessage = "New Password must contains at least one UPPERCASE letter";
       flag = true;
     }
-    if (/#*.!?$/.test(<string>this.newPassword) == false){
+    if (/[#*.!?$]/.test(<string>this.newPassword) == false){
       this.newPasswordMessage= "New Password must contains at least one special character";
       flag = true;
     }
@@ -72,7 +72,7 @@ export class PasswordChangeComponent implements OnInit {
     i = 0;
     while (i < this.newPassword.length-1){
       if (this.newPassword.charAt(i) == tmp.charAt(i+1)){
-        this.newPasswordMessage= "New Password can't have successive same letters";
+        this.newPasswordMessage= "New Password can't have successive same characters";
         flag = true;
         break;
       }

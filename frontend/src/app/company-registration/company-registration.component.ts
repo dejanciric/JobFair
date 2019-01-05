@@ -21,9 +21,12 @@ export class CompanyRegistrationComponent implements OnInit {
   PIB:String="";
   employeeNumber:String="";
   webSite:String="";
-  work:String="";
+  work:String="-- Choose Work Area --";
   mail:String="";
   special:String="";
+
+  selectedFile:File;
+
 
   cityMessage:String="";
   addressMessage:String="";
@@ -40,6 +43,8 @@ export class CompanyRegistrationComponent implements OnInit {
   lastnameMessage:String="";
   companyNameMessage:String="";
   mailMessage:String="";
+  imageMessage:String="";
+
 
   constructor(private router: Router, private service: UsersService) { }
 
@@ -108,6 +113,10 @@ export class CompanyRegistrationComponent implements OnInit {
       this.workMessage = "Work Area is required";
       flag = true;
     }
+    if (this.selectedFile == undefined){
+      this.imageMessage = "Image is required";
+      flag = true;
+    }
 
     if (flag)
       return;
@@ -127,6 +136,10 @@ export class CompanyRegistrationComponent implements OnInit {
         this.employeeNumberMessage  = "Employee number can contain only digits";
         flag = true;
       }
+      if(this.selectedFile.type != "image/jpeg" && this.selectedFile.type != "image/png"){
+        this.imageMessage = "Image format is not correct";
+        flag = true;
+      }
       if (flag)
       return;
 
@@ -135,7 +148,9 @@ export class CompanyRegistrationComponent implements OnInit {
           this.usernameMessage = "Username already exists";
         }else{
           this.service.registerCompany(this.username, this.password, this.firstname, this.lastname, this.companyName, this.mail, this.city, this.address, this.PIB, this.employeeNumber, this.webSite, this.work, this.special).subscribe(()=>{
-            this.router.navigate(['/login']);
+            this.service.uploadFile(this.selectedFile).subscribe(()=>{
+              this.router.navigate(['/login']);
+            });
           })
         }
        
@@ -158,7 +173,7 @@ export class CompanyRegistrationComponent implements OnInit {
       this.passwordMessage = "Password must contains at least one UPPERCASE letter";
       flag = true;
     }
-    if (/#*.!?$/.test(<string>this.password) == false){
+    if (/[#*.!?$]/.test(<string>this.password) == false){
       this.passwordMessage= "Password must contains at least one special character";
       flag = true;
     }
@@ -178,7 +193,7 @@ export class CompanyRegistrationComponent implements OnInit {
     i = 0;
     while (i < this.password.length-1){
       if (this.password.charAt(i) == tmp.charAt(i+1)){
-        this.passwordMessage= "Password can't have successive same letters";
+        this.passwordMessage= "Password can't have successive same characters";
         flag = true;
         break;
       }
@@ -191,6 +206,11 @@ export class CompanyRegistrationComponent implements OnInit {
     }
     
       return flag;
+  }
+
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0];
+    //this.service.uploadFile(selectedFile);
   }
 
 }

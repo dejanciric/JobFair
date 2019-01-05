@@ -3,6 +3,7 @@ import { CompanyService } from '../company.service';
 import { Router } from '@angular/router';
 import { Offer } from '../offer.model';
 import { User } from '../user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-offer-detail',
@@ -19,10 +20,19 @@ export class OfferDetailComponent implements OnInit {
 
   companyName:String = "";
   city:String = "";
+  image:String="";
 
-  constructor(private service:CompanyService, private router:Router) { }
+  constructor(private service:CompanyService, private router:Router, private userService:UsersService) { }
 
   ngOnInit() {
+    this.image=this.userService.getImage();
+    this.userService.findCompanyByName(this.companyName).subscribe((user:User)=>{
+      this.service.companyUsernameForDetails = user.username;
+      this.service.companyName = this.companyName;
+      this.service.companyImage = user.image;
+      this.router.navigate(['/companyDetails']);
+      
+    })
     this.service.findOfferById(this.service.selectedOfferId).subscribe((offer:Offer)=>{
       this.title = offer.title;
       this.type = offer.type;
@@ -37,5 +47,11 @@ export class OfferDetailComponent implements OnInit {
 
 
   }
+
+  apply(){
+    this.router.navigate(['/apply']);
+  }
+
+
 
 }

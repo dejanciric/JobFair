@@ -1,0 +1,124 @@
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+    
+    <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo" >
+ 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/student">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/guest">Companies</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/studentOffers">Offers</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/results">Application results</a>
+                        </li>
+                    </ul>
+            
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <img class="p-0 m-2 rounded" [src]="image" height="40" >
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/login">Logout</a>
+                        </li>
+                    </ul>
+                
+        </div>
+</nav>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+              <div class="jumbotron">
+                  
+                  <div class ="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm m-3" [value]="username" type="text" placeholder="Username" [(ngModel)]='username' name="username" >
+                              </div>
+                        </div>
+                      <div class="row">
+                          <div class="col-sm-5">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="First Name" [(ngModel)]='firstname' name="firstname" [value]="firstname">
+    
+                          </div>
+                          <div align="center" class="col-sm-6">
+                              <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="Last Name"  [(ngModel)]='lastname' name="lastname" [value]="lastname">
+    
+                          </div>
+                      </div>
+                      <div class ="row">
+                          <div class="col-sm-4">
+                              <select class="custom-select m-3" [(ngModel)]='phoneType' name="phoneType">
+                                  <option value="Mobile">Mobile</option>
+                                  <option value="Home">Home</option>
+                                  <option value="Work">Work</option>
+                                </select> 
+                          </div>
+                          <div class="col-sm-6">
+                              <input class="form-control form-control-sm m-3" type="text" placeholder="Number" [(ngModel)]='phone' name="phone" [value]="phone">
+  
+                          </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm m-3" [value]="mail" type="text" placeholder="E-mail address" [(ngModel)]='mail' name="mail" >
+                              </div>
+                        </div>
+                        <div class="row">
+                            <div align="center"  class="col-sm-10">
+                                <button class="btn btn-dark m-3" (click)="load()">Load from CV</button>
+                              </div>
+                              
+                        </div>
+                    </div>
+                      
+                      
+                      <div  class="col-sm-4">
+                          Cover letter:
+                          <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="10" [(ngModel)]='cover' name='cover'></textarea>
+
+                      </div>
+
+                    </div>
+                    
+                
+              </div>
+              <div class="row">
+                  <div  align="center" class="col-12">
+                      <button  class="btn btn-primary" (click)="apply()">Apply</button>
+                    </div>
+                    
+              </div>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    <br/>
+    <br/>
+    <footer class="page-footer font-small bg-dark pt-4 mt-4">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></div>
+                <div class="col-sm-6">
+                    
+                        <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                            <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                        </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>

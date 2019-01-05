@@ -4,5 +4,6 @@ export interface Offer{
     type: String,
     content: String,
     deadline:String,
-    companyUsername: String
+    companyUsername: String,
+    students:[{"username":String, "firstname":String, "lastname":String, "result":String}]
 }

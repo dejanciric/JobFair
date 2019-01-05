@@ -12,6 +12,9 @@ import { AdminRegistrationComponent } from './admin-registration/admin-registrat
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { OffersComponent } from './offers/offers.component';
 import { OfferDetailComponent } from './offer-detail/offer-detail.component';
+import { StudentOffersComponent } from './student-offers/student-offers.component';
+import { ApplyComponent } from './apply/apply.component';
+import { ResultsComponent } from './results/results.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -26,6 +29,9 @@ const routes: Routes = [
   {path: 'companyDetails', component: CompanyDetailsComponent},
   {path: 'offers', component: OffersComponent},
   {path: 'offerDetails', component: OfferDetailComponent},
+  {path: 'studentOffers', component: StudentOffersComponent},
+  {path: 'apply', component: ApplyComponent},
+  {path: 'results', component: ResultsComponent},
   {path: '', component: LoginComponent},
 ];
 

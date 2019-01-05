@@ -20,6 +20,8 @@ export class RegistrationComponent implements OnInit {
   year:String="";
   graduated:boolean=false;
 
+  selectedFile:File;
+
   yearMessage:String="";
   usernameMessage:String="";
   passwordMessage:String="";
@@ -28,6 +30,7 @@ export class RegistrationComponent implements OnInit {
   lastnameMessage:String="";
   phoneMessage:String="";
   mailMessage:String="";
+  imageMessage:String="";
 
   constructor(private router: Router, private service: UsersService) { }
 
@@ -73,6 +76,10 @@ export class RegistrationComponent implements OnInit {
       this.mailMessage = "E-mail address is required";
       flag = true;
     }
+    if (this.selectedFile == undefined){
+      this.imageMessage = "Image is required";
+      flag = true;
+    }
     if (flag)
       return;
 
@@ -95,6 +102,10 @@ export class RegistrationComponent implements OnInit {
         this.yearMessage  = "Year can contain only digit";
         flag = true;
       }
+      if(this.selectedFile.type != "image/jpeg" && this.selectedFile.type != "image/png"){
+        this.imageMessage = "Image format is not correct";
+        flag = true;
+      }
       if (flag)
       return;
 
@@ -103,7 +114,10 @@ export class RegistrationComponent implements OnInit {
           this.usernameMessage = "Username already exists";
         }else{
           this.service.registerStudent(this.username, this.password, this.firstname, this.lastname, this.phone, this.mail, this.year, this.graduated).subscribe(()=>{
-            this.router.navigate(['/login']);
+            this.service.uploadFile(this.selectedFile).subscribe(()=>{
+              this.router.navigate(['/login']);
+            });
+           
           })
         }
        
@@ -126,7 +140,7 @@ export class RegistrationComponent implements OnInit {
       this.passwordMessage = "Password must contains at least one UPPERCASE letter";
       flag = true;
     }
-    if (/#*.!?$/.test(<string>this.password) == false){
+    if (/[#*.!?$]/.test(<string>this.password) == false){
       this.passwordMessage= "Password must contains at least one special character";
       flag = true;
     }
@@ -146,7 +160,7 @@ export class RegistrationComponent implements OnInit {
     i = 0;
     while (i < this.password.length-1){
       if (this.password.charAt(i) == tmp.charAt(i+1)){
-        this.passwordMessage= "Password can't have successive same letters";
+        this.passwordMessage= "Password can't have successive same characters";
         flag = true;
         break;
       }
@@ -162,7 +176,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   onFileSelected(event){
-    console.log(event); 
+    this.selectedFile = event.target.files[0];
+    //this.service.uploadFile(selectedFile);
   }
 
 }

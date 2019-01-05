@@ -16,5 +16,6 @@ export interface User{
     employeeNumber: String,
     webSite: String,
     work: String,
-    special: String
+    special: String,
+    image: String
 }

@@ -8,9 +8,17 @@ import { last } from '@angular/router/src/utils/collection';
 })
 export class UsersService {
   uri='http://localhost:4000'
+  updatePath:String = "http://localhost:4000/uploads/";
 
+  loggedUsername:String="";
+  loggedImage:String="";
+  user = false;
+  
   constructor(private http: HttpClient) { }
 
+  getImage():String{
+    return <string>this.updatePath + this.loggedImage;
+  }
   login(username, password){
     const data = {
       username: username,
@@ -52,9 +60,35 @@ export class UsersService {
       mail:mail,
       type:"student",
       year:year,
-      graduated:grad
+      graduated:grad,
+      image: ""
     }
+    const cv = {
+      username: username,
+      firstname: "",
+      lastname: "",
+      address: "",
+      postcode:"",
+      city: "",
+      country: "",
+      phoneType: "Mobile",
+      phone: "",
+      mail: "",
+      applicationType:"Full time job",
+      description: "",
+      additionalSkillsText: "",
+      educations: [],
+      works: [],
+      language1: "",
+      language2:"",
+      language3: "",
+      language1knowladge: "Basic",
+      language2knowladge:"Basic",
+      language3knowladge: "Basic"
+    }
+    this.http.post(`${this.uri}/initializeCV`, cv).subscribe(()=>{
 
+    });
     return this.http.post(`${this.uri}/register`, data);
   }
 
@@ -66,7 +100,8 @@ export class UsersService {
       lastname:lastname,
       phone:phone,
       mail:mail,
-      type:"admin"
+      type:"admin",
+      image:""
     }
 
     return this.http.post(`${this.uri}/register`, data);
@@ -87,11 +122,100 @@ export class UsersService {
       employeeNumber:employeeNumber,
       webSite:webSite,
       work:work,
-      special:special
+      special:special,
+      image:""
     }
 
     return this.http.post(`${this.uri}/register`, data);
   }
 
+  uploadFile(selectedFile:File){
+    const fd = new FormData();
+    fd.append("image", selectedFile, selectedFile.name);
+    return this.http.post(`${this.uri}/uploadImage`, fd);
+  }
+
+  readCV(){
+    const data = {
+      username:this.loggedUsername
+    }
+
+    return this.http.post(`${this.uri}/readCV`, data);
+  }
+
+  updateCV(username,
+    firstname,
+    lastname,
+    address,
+    postcode,
+    city,
+    country,
+    phoneType,
+    phone,
+    mail,
+    applicationType,
+    description,
+    additionalSkillsText,
+    educations,
+    works,
+    language1,
+    language2,
+    language3,
+    language1knowladge,
+    language2knowladge,
+    language3knowladge ){
+
+      const data={
+        username:username,
+        firstname:firstname,
+        lastname:lastname,
+        address:address,
+        postcode:postcode,
+        city:city,
+        country:country,
+        phoneType:phoneType,
+        phone:phone,
+        mail:mail,
+        applicationType:applicationType,
+        description:description,
+        additionalSkillsText:additionalSkillsText,
+        educations:educations,
+        works:works,
+        language1:language1,
+        language2:language2,
+        language3:language3,
+        language1knowladge:language1knowladge,
+        language2knowladge:language2knowladge,
+        language3knowladge:language3knowladge
+      }
+
+      return this.http.post(`${this.uri}/updateCV`, data);
+
+    }
+
+    searchOffer(title, type){
+      const data = {
+        title:title,
+        type:type
+      }
+      return this.http.post(`${this.uri}/searchOffer`, data);
+    }
+
+    findCompanyByName(name){
+      const data = {
+        companyName:name
+
+      }
+      return this.http.post(`${this.uri}/findCompanyByName`, data);
+    }
+
+    applyToOffer(offerId, students){
+      const data = {
+        id:offerId,
+        students:students
+
+      }
+      return this.http.post(`${this.uri}/applyToOffer`, data);
+    }
 
 }

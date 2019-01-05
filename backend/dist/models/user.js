@@ -56,6 +56,9 @@ let User = new Schema({
     },
     special: {
         type: String
+    },
+    image: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('User', User);
