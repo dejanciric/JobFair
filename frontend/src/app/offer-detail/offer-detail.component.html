@@ -54,6 +54,9 @@
                 <div align="center" class="h2">{{title}}</div>
                 <div align="center" class="h3"><a routerLink="/companyDetails">{{companyName}}</a></div>
                 <div align="center" class="h4">{{city}}</div>
+                <div align="center"><img  class="p-0 m-2 rounded" [src]="imageOffer" height="100" ></div>
+                
+
                 <p class="d-flex p-2 bd-highlight m-4" >{{content}}</p>
                 <div class="badge badge-primary m-4"  >{{type}}</div>
                 <div class="badge badge-warning float-right m-4"  >Deadline: {{deadline}}</div>
@@ -62,7 +65,8 @@
         </div>
         <div class="row">
                 <div class="col-10" align="center">
-                  <button *ngIf="this.userService.user" class="btn btn-primary" (click)="apply()">Apply now</button>
+                  <button *ngIf="this.userService.user && !expired()" class="btn btn-primary" (click)="apply()">Apply now</button>
+                <p *ngIf="expired()" style="color: red">Offer Expired</p>
                 </div>
             </div>
     

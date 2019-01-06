@@ -1,3 +1,120 @@
-<p>
-  company works!
-</p>
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+    
+    <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo" >
+ 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/company">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/hiring">Hiring</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/applyJobfair">Apply Jobfair</a>
+                        </li>
+                   
+                    </ul>
+            
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <img class="p-0 m-2 rounded" [src]="image" height="40" >
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/login">Logout</a>
+                        </li>
+                    </ul>
+                
+        </div>
+</nav>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+              
+              <div class="jumbotron">
+                  <div class ="row">
+                      <div class="col-sm-10">
+                        <h2 align="center" class=" mb-5">New Offer</h2>
+                        </div>
+                  </div>
+                  <div class ="row">
+
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm m-3" [value]="title" type="text" placeholder="Title" [(ngModel)]='title' name="title" >
+                              </div>
+                        </div>
+                      
+                      <div class ="row">
+                          <div class="col-sm-4">
+                              <select class="custom-select m-3" [(ngModel)]='type' name="type" >
+                                  <option value="Full time">Full time</option>
+                                  <option value="Part time">Part time</option>
+                                  <option value="Internship">Internship</option>
+                                </select> 
+                          </div>
+                          <div class="col-sm-6">
+                              <input class="form-control form-control-sm m-3" type="text" placeholder="Deadline (DD/MM/YYYY)" [(ngModel)]='deadline' name="deadline" [value]="deadline">
+  
+                          </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="custom-file m-3">
+                                    <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
+                                    <label class="custom-file-label" for="customFile">Choose File</label>
+                                </div>                              </div>
+                        </div>
+                        
+                    </div>
+                      
+                      
+                      <div  class="col-sm-4">
+                          Content:
+                          <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="8" [(ngModel)]='content' name='content' [value]='content'></textarea>
+                         
+                      </div>
+                      
+
+                    </div>
+                    
+                
+              </div>
+              <div class="row">
+                  <div  align="center" class="col-12">
+                      <button  class="btn btn-primary" (click)="publish()">Publish offer</button>
+                    </div>
+                    
+              </div>
+              <div *ngIf="success" class="alert alert-success mt-2" role="alert">
+                 Successfully published offer
+                </div>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    <br/>
+    <br/>
+    <footer class="page-footer font-small bg-dark pt-4 mt-4">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></div>
+                <div class="col-sm-6">
+                    
+                        <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                            <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                        </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>

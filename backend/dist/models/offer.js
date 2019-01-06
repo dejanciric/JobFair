@@ -28,7 +28,10 @@ let Offer = new Schema({
         type: String
     },
     students: {
-        type: [{ "username": String, "firstname": String, "lastname": String, "result": String }]
+        type: [{ "username": String, "firstname": String, "lastname": String, "result": String, "comment": String }]
+    },
+    image: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('Offer', Offer);

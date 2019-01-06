@@ -23,6 +23,10 @@ import { StudentOffersComponent } from './student-offers/student-offers.componen
 import { ApplyComponent } from './apply/apply.component';
 import { ResultsComponent } from './results/results.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HiringComponent } from './hiring/hiring.component';
+import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
+import { ResultsCompanyComponent } from './results-company/results-company.component';
+import { CompanyRequestsComponent } from './company-requests/company-requests.component';
 
 
 
@@ -43,7 +47,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     OfferDetailComponent,
     StudentOffersComponent,
     ApplyComponent,
-    ResultsComponent
+    ResultsComponent,
+    HiringComponent,
+    ApplyJobfairComponent,
+    ResultsCompanyComponent,
+    CompanyRequestsComponent
   ],
   imports: [
     BrowserModule,

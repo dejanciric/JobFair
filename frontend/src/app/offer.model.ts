@@ -6,5 +6,6 @@ export interface Offer{
     deadline:String,
     companyName: String,
     companyUsername: String,
-    students:[{"username":String, "firstname":String, "lastname":String, "result":String}]
+    students:[{"username":String, "firstname":String, "lastname":String, "result":String, "comment":String}],
+    image:String
 }

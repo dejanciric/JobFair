@@ -20,10 +20,13 @@ connection.once('open', () => {
 });
 const router = express_1.default.Router();
 let username = "";
+let id = "";
 const user_1 = __importDefault(require("./models/user"));
 const offer_1 = __importDefault(require("./models/offer"));
 const cv_1 = __importDefault(require("./models/cv"));
 const employed_1 = __importDefault(require("./models/employed"));
+const package_1 = __importDefault(require("./models/package"));
+const companyrequest_1 = __importDefault(require("./models/companyrequest"));
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -298,6 +301,139 @@ router.route('/updateNum').post((req, res) => {
         else {
             res.json({ message: 'COmpany updated!' });
             //console.log("alo");
+        }
+    });
+});
+router.route('/findAllOffers').get((req, res) => {
+    offer_1.default.find((err, offer) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(offer);
+    });
+});
+router.route('/publishOffer').post((req, res) => {
+    let offer = new offer_1.default(req.body);
+    this.id = req.body.id;
+    offer.save().
+        then(offer => {
+        res.status(200).json({ 'offer': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'offer': 'no' });
+    });
+});
+router.route('/uploadFileOffer').post(upload.single('image'), (req, res, next) => {
+    //console.log(req.file.filename + "," + req.file.originalname+","+this.username);
+    offer_1.default.findOneAndUpdate({ 'id': this.id }, { 'image': req.file.filename }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'Image updated!' });
+            //console.log("alo");
+        }
+    });
+});
+router.route('/readCompanyOffers').post((req, res) => {
+    let companyUsername = req.body.companyUsername;
+    offer_1.default.find({ "companyUsername": companyUsername }, (err, offer) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(offer);
+    });
+});
+router.route('/savePackages').post((req, res) => {
+    let packagee = new package_1.default(req.body);
+    console.log(packagee);
+    packagee.save().
+        then(packagee => {
+        res.status(200).json({ 'package': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'package': 'no' });
+    });
+});
+router.route('/deletePackages').get((req, res) => {
+    package_1.default.deleteMany({}, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            res.json({ message: 'Offer Deleted!' });
+        }
+    });
+});
+router.route('/readPackage').get((req, res) => {
+    package_1.default.find((err, p) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(p);
+    });
+});
+router.route('/readCompanyRequests').post((req, res) => {
+    let companyName = req.body.companyName;
+    companyrequest_1.default.find({ "companyName": companyName }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/readAllRequests').post((req, res) => {
+    companyrequest_1.default.find({ "result": "TBA" }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/saveRequest').post((req, res) => {
+    let cr = new companyrequest_1.default(req.body);
+    //console.log(packagee);
+    cr.save().
+        then(cr => {
+        res.status(200).json({ 'cr': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'cr': 'no' });
+    });
+});
+router.route('/updateRequests').post((req, res) => {
+    let companyName = req.body.companyName;
+    let title = req.body.title;
+    let result = req.body.result;
+    let comment = req.body.comment;
+    companyrequest_1.default.findOneAndUpdate({ 'companyName': companyName, "title": title, "result": "TBA" }, { 'result': result, 'comment': comment }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'CompanyRequest updated!' });
+            //console.log("alo");
+        }
+    });
+});
+router.route('/findReqByTitle').post((req, res) => {
+    let title = req.body.title;
+    companyrequest_1.default.find({ "title": title }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/deleteReq').post((req, res) => {
+    let companyName = req.body.companyName;
+    let title = req.body.title;
+    let result = req.body.result;
+    let comment = req.body.comment;
+    companyrequest_1.default.findOneAndRemove({ 'companyName': companyName, "title": title, "result": result, "comment": comment }, (err) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.json({ message: 'req Deleted!' });
         }
     });
 });

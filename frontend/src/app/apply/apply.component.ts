@@ -42,7 +42,7 @@ export class ApplyComponent implements OnInit {
   apply(){
     this.companyService.findOfferById(this.companyService.selectedOfferId).subscribe((offer:Offer)=>{
       let students = offer.students;
-      students.push({"username":this.username, "firstname":this.firstname, "lastname":this.lastname, "result":"TBA"});
+      students.push({"username":this.username, "firstname":this.firstname, "lastname":this.lastname, "result":"TBA", "comment":""});
       this.service.applyToOffer(this.companyService.selectedOfferId, students).subscribe(()=>{
         this.router.navigate(['/student']);
       })

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { last } from '@angular/router/src/utils/collection';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,7 +15,10 @@ export class UsersService {
   loggedImage:String="";
   user = false;
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+
+  }
 
   getImage():String{
     return <string>this.updatePath + this.loggedImage;
@@ -133,6 +137,12 @@ export class UsersService {
     const fd = new FormData();
     fd.append("image", selectedFile, selectedFile.name);
     return this.http.post(`${this.uri}/uploadImage`, fd);
+  }
+
+  uploadFileOffer(selectedFile:File){
+    const fd = new FormData();
+    fd.append("image", selectedFile, selectedFile.name);
+    return this.http.post(`${this.uri}/uploadFileOffer`, fd);
   }
 
   readCV(){
@@ -256,4 +266,102 @@ export class UsersService {
       return this.http.post(`${this.uri}/updateNum`, data);
     }
 
+    findAllOffers(){
+      return this.http.get(`${this.uri}/findAllOffers`);
+    }
+
+    publishOffer(id, title, type, deadline, content, companyName, companyUsername, image){
+      const data={
+        id:id,
+        title:title,
+        type:type,
+        deadline:deadline,
+        content:content,
+        companyName:companyName,
+        companyUsername:companyUsername,
+        image:image,
+        students:[]
+      }
+      return this.http.post(`${this.uri}/publishOffer`, data);
+    }
+
+    readCompanyOffers(companyUsername){
+      const data ={
+        companyUsername: companyUsername
+      }
+      return this.http.post(`${this.uri}/readCompanyOffers`, data);
+    }
+
+    getJSON(url): Observable<any>{
+      return this.http.get(url);
+    }
+
+    savePackages(packages, additionals){
+      const data ={
+        packages: packages,
+        additionals: additionals
+      }
+      return this.http.post(`${this.uri}/savePackages`, data);
+    }
+
+    deletePackages(){
+      return this.http.get(`${this.uri}/deletePackages`);
+
+    }
+
+    readPackage(){
+      return this.http.get(`${this.uri}/readPackage`);
+
+    }
+    readCompanyRequests(companyName){
+      const data ={
+        companyName: companyName
+      }
+      return this.http.post(`${this.uri}/readCompanyRequests`, data);
+    }
+
+    readAllRequests(){
+      const data ={
+        companyName: ""
+      }
+      return this.http.post(`${this.uri}/readAllRequests`, data);
+    }
+
+    saveRequest(companyName, title, result){
+      const data ={
+        companyName: companyName,
+        title:title,
+        result:result,
+        comment:""
+      }
+      return this.http.post(`${this.uri}/saveRequest`, data);
+    }
+
+    updateRequests(companyName, title, result, comment){
+      const data ={
+        companyName: companyName,
+        title:title,
+        result:result,
+        comment:comment
+      }
+      return this.http.post(`${this.uri}/updateRequests`, data);
+    }
+
+    findReqByTitle(companyName){
+      const data ={
+        title: companyName
+
+      }
+      return this.http.post(`${this.uri}/findReqByTitle`, data);
+    }
+
+    deleteReq(companyName, title, result, comment){
+      const data ={
+        companyName: companyName,
+        title:title,
+        result:result,
+        comment:comment
+      }
+      return this.http.post(`${this.uri}/deleteReq`, data);
+    }
 }

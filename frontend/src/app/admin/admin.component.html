@@ -1,3 +1,172 @@
-<p>
-  admin works!
-</p>
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+    
+    <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo" >
+ 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/admin">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Companiy requests</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/studentOffers">Offers</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/results">Application results</a>
+                        </li>
+                    </ul>
+            
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <img class="p-0 m-2 rounded" [src]="image" height="40" >
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/login">Logout</a>
+                        </li>
+                    </ul>
+                
+        </div>
+</nav>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+              <div class="jumbotron">
+                  
+                  <div class ="row">
+                    <div class="col-sm-5" >
+                        <h3 class="mb-3">Packages</h3>
+                      <div *ngFor="let package of packages">
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                Title:
+                                <input class="form-control form-control-sm mb-2" [value]="package.Title" type="text" [(ngModel)]='package.Title' name="package.Title" >
+                              </div>
+                        </div>
+                        Content:
+                        <div class="row" *ngFor="let content of package.Content">
+                            <div class="col-sm-10">
+                               
+                                <input class="form-control form-control-sm " [value]="content" type="text" [(ngModel)]='content' name="content" >
+                              </div>
+                        </div>
+                        <button class="btn btn-primary mt-2 mb-2" (click)="addContent(package)">Add content</button>
+                      <div class="row">
+                          <div class="col-sm-5">
+                              Video Promotion Minutes:
+                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.VideoPromotion' name="package.VideoPromotion" [value]="package.VideoPromotion">
+    
+                          </div>
+                          <div  class="col-sm-6">
+                              Lessons Number
+                              <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.NoLessons' name="package.NoLessons" [value]="package.NoLessons">
+    
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-5">
+                              Workchops Number
+                              <input class="form-control form-control-sm mb-2 w-75" type="text" [(ngModel)]='package.NoWorkchops' name="package.NoWorkchops" [value]="package.NoWorkchops">
+    
+                          </div>
+                          <div  class="col-sm-6">
+                              Presentation Number
+                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.NoPresentation' name="package.NoPresentation" [value]="package.NoPresentation">
+    
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-5">
+                              Price:
+                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.Price' name="package.Price" [value]="package.Price">
+    
+                          </div>
+                          <div  class="col-sm-6">
+                              Max Num of Companies:
+                              <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.MaxCompanies' name="package.MaxCompanies" [value]="package.MaxCompanies">
+    
+                          </div>
+                      </div>
+                      
+                    </div>
+                    <button  class="btn btn-danger" (click)="add()">Add package</button>
+                   
+                  </div>
+                      
+                      <div  class="col-sm-7">
+                          <h3 class="mb-3">Additional</h3>
+                          <div class="row" *ngFor="let additional of additionals">
+
+                              <div class="col-sm-9">
+                                  Title:
+                                  <input class="form-control form-control-sm mb-3 w-75" type="text" [(ngModel)]='additional.Title' name="additional.Title" [value]="additional.Title">
+        
+                              </div>
+                              <div  class="col-sm-3">
+                                  Price:
+                                  <input class="form-control form-control-sm mb-3 w-75" type="text"  [(ngModel)]='additional.Price' name="additional.Price" [value]="additional.Price">
+        
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div  class="col-sm-7">
+                                  <button  class="btn btn-danger" (click)="addAdditional()">Add additional</button>
+                                </div>
+                                
+                          </div>
+                      </div>
+                      
+
+                    </div>
+                    <div class="row">
+                        <div  align="center" class="col-sm-12">
+                            <div class="custom-file m-4" style="width: 300px">
+                                <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
+                                <label class="custom-file-label" for="customFile">Load from file</label>
+                            </div>
+                          </div>
+                          
+                    </div>
+                    
+                
+              </div>
+              <div class="row">
+                  <div  align="center" class="col-12">
+                      <button  class="btn btn-primary" (click)="save()">Save</button>
+                      
+                    </div>
+                    
+              </div>
+              <div *ngIf="flag" class="alert alert-success mt-2" role="alert">
+                  Successfully saved packages and additionals
+                 </div>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    <br/>
+    <br/>
+    <footer class="page-footer font-small bg-dark pt-4 mt-4">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></div>
+                <div class="col-sm-6">
+                    
+                        <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                            <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                        </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>

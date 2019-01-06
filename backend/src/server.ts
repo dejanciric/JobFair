@@ -24,11 +24,14 @@ connection.once('open', ()=>{
 const router = express.Router();
 
 let username = "";
+let id="";
 
 import User from './models/user';
 import Offer from './models/offer';
 import cv from './models/cv';
 import Employed from './models/employed';
+import Package from './models/package';
+import CompanyRequest from './models/companyrequest';
 
 import { Request } from 'express-serve-static-core';
 
@@ -381,5 +384,175 @@ router.route('/updateNum').post(
 
     }
 );
+
+
+router.route('/findAllOffers').get(
+    (req, res)=>{
+
+        Offer.find(
+         (err,offer)=>{
+            if(err) console.log(err);
+            else res.json(offer);
+        })
+    }
+);
+
+router.route('/publishOffer').post((req, res)=>{
+    let offer = new Offer(req.body);
+    this.id = req.body.id;
+    offer.save().
+        then(offer=>{
+            res.status(200).json({'offer':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'offer':'no'});
+        })
+});
+
+router.route('/uploadFileOffer').post(upload.single('image'), (req : FileRequest , res, next)=>{
+    //console.log(req.file.filename + "," + req.file.originalname+","+this.username);
+
+    Offer.findOneAndUpdate({'id': this.id}, {'image':req.file.filename}, (err)=>{
+        if (err){
+            res.send(err);
+           // console.log("error");
+        }
+
+        else{
+            res.json({ message: 'Image updated!'});
+            //console.log("alo");
+        }
+    })
+
+});
+
+router.route('/readCompanyOffers').post(
+    (req, res)=>{
+        let companyUsername = req.body.companyUsername;
+        Offer.find({"companyUsername":companyUsername},
+         (err,offer)=>{
+            if(err) console.log(err);
+            else res.json(offer);
+        })
+    }
+);
+
+router.route('/savePackages').post((req, res)=>{
+    let packagee = new Package(req.body);
+    console.log(packagee);
+    packagee.save().
+        then(packagee=>{
+            res.status(200).json({'package':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'package':'no'});
+        })
+});
+
+router.route('/deletePackages').get((req, res)=>{
+
+    Package.deleteMany({},(err)=>{
+        if(err) console.log(err);
+        else{
+            res.json({ message: 'Offer Deleted!'});
+           
+        }
+    })
+    
+});
+
+router.route('/readPackage').get(
+    (req, res)=>{
+        Package.find(
+         (err,p)=>{
+            if(err) console.log(err);
+            else res.json(p);
+        })
+    }
+    
+);
+
+router.route('/readCompanyRequests').post(
+    (req, res)=>{
+        let companyName = req.body.companyName;
+        CompanyRequest.find({"companyName":companyName},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+
+router.route('/readAllRequests').post(
+    (req, res)=>{
+       
+        CompanyRequest.find({"result":"TBA"},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+
+
+router.route('/saveRequest').post((req, res)=>{
+    let cr = new CompanyRequest(req.body);
+    //console.log(packagee);
+    cr.save().
+        then(cr=>{
+            res.status(200).json({'cr':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'cr':'no'});
+        })
+});
+
+router.route('/updateRequests').post(
+    (req, res)=>{
+        let companyName = req.body.companyName;
+        let title = req.body.title;
+        let result = req.body.result;
+        let comment = req.body.comment;
+        CompanyRequest.findOneAndUpdate({'companyName':companyName, "title":title, "result":"TBA"}, {'result':result, 'comment':comment}, (err)=>{
+            if (err){
+                res.send(err);
+               // console.log("error");
+            }
+    
+            else{
+                res.json({ message: 'CompanyRequest updated!'});
+                //console.log("alo");
+            }
+        })
+
+    }
+);
+
+router.route('/findReqByTitle').post(
+    (req, res)=>{
+       let title = req.body.title;
+        CompanyRequest.find({"title":title},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+
+router.route('/deleteReq').post((req, res)=>{
+    let companyName = req.body.companyName;
+    let title = req.body.title;
+    let result = req.body.result;
+    let comment = req.body.comment;
+    CompanyRequest.findOneAndRemove({'companyName':companyName, "title":title, "result":result, "comment":comment}, (err)=>{
+        if (err){
+            res.send(err);
+           
+        }
+
+        else{
+            res.json({ message: 'req Deleted!'});
+           
+        }
+    })
+})
+
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

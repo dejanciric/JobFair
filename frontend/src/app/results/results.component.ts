@@ -18,6 +18,7 @@ export class ResultsComponent implements OnInit {
   offers:Offer[];
   currentRate=0;
 
+  deadline:String="";
   image:String="";
   employed=false;
 
@@ -56,6 +57,17 @@ export class ResultsComponent implements OnInit {
         this.employed=false;
         this.service.readMyOffers(this.service.loggedUsername).subscribe((offers:Offer[])=>{
           this.offers = offers;
+          let i = this.offers.length-1;
+          while (i >= 0){
+            if (this.offers[i].students.length> 0 && this.offers[i].students[0].result=='TBA'){
+              this.offers.splice(i,1);
+            }
+            this.deadline = this.offers[i].deadline;
+            if(!this.expired()){
+              this.offers.splice(i,1);
+            }
+            i--;
+          }
         })
       }
     })
@@ -134,8 +146,10 @@ export class ResultsComponent implements OnInit {
   }
 
   checkFirstOneMonthLessThenSecond(first:string, second:string){
-    let firstDate = new Date(first);
-    let secondDate = new Date(second);
+    let f:string[] = first.split("/");
+    let s:string[] = second.split("/");
+    let firstDate = new Date(+f[2],+f[1]-1, +f[0]);
+    let secondDate = new Date(+s[2],+s[1]-1, +s[0]);
     let tmp = secondDate;
     tmp.setMonth(tmp.getMonth()-1);
 
@@ -144,4 +158,20 @@ export class ResultsComponent implements OnInit {
     }
     return false;
   }
+
+  expired(){
+    let reallyCurrDate = this.getCurrDate();
+    let f:string[] = this.deadline.split("/");
+    let s:string[] = reallyCurrDate.split("/");
+    
+    let firstDate = new Date(+f[2],+f[1]-1, +f[0]);
+    let secondDate = new Date(+s[2],+s[1]-1, +s[0]);
+    
+    if (firstDate < secondDate){
+      return true;
+    }
+    return false;
+  }
+
+
 }
