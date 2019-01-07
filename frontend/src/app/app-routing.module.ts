@@ -19,6 +19,7 @@ import { HiringComponent } from './hiring/hiring.component';
 import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
 import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -40,6 +41,8 @@ const routes: Routes = [
   {path: 'applyJobfair', component: ApplyJobfairComponent},
   {path: 'hiring', component: HiringComponent},
   {path: 'companyRequests', component: CompanyRequestsComponent},
+  {path: 'adminHome', component: AdminHomeComponent},
+
   {path: '', component: LoginComponent},
 ];
 

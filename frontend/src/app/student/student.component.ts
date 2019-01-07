@@ -3,6 +3,7 @@ import { Education } from '../education.model';
 import { Work } from '../work.model';
 import { UsersService } from '../users.service';
 import { CV } from '../cv.model';
+import { Period } from '../periods.model';
 
 @Component({
   selector: 'app-student',
@@ -59,11 +60,25 @@ export class StudentComponent implements OnInit {
 
   image:String="";
 
+  disable=false;
 
   constructor(private service: UsersService) { }
 
   ngOnInit() {
     this.image = this.service.getImage();
+    let currDate = new Date();
+    this.service.readPeriods().subscribe((p:Period)=>{
+      let f:string[] = p.studentsFrom.split("/");
+      let from = new Date(+f[2],+f[1]-1, +f[0]);
+  
+      let t:string[] = p.studentsTo.split("/");
+      let to = new Date(+t[2],+t[1]-1, +t[0]);
+  
+      if (currDate >= from && currDate <=  to)
+      this.disable = false;
+      else
+      this.disable = true;
+    })
     this.service.readCV().subscribe((cv:CV)=>{
       this.firstname=cv.firstname;
       this.lastname=cv.lastname;
@@ -236,5 +251,24 @@ export class StudentComponent implements OnInit {
   editWork(work:Work){
     work.editing = true;
   }
+
+  inPeriod(){
+    let currDate = new Date();
+    this.service.readPeriods().subscribe((p:Period)=>{
+      let f:string[] = p.studentsFrom.split("/");
+      let from = new Date(+f[2],+f[1]-1, +f[0]);
+  
+      let t:string[] = p.studentsTo.split("/");
+      let to = new Date(+t[2],+t[1]-1, +t[0]);
+  
+      if (currDate >= from && currDate <=  to)
+      return true;
+      else
+      return false;
+    })
+
+  }
+
+
 
 }

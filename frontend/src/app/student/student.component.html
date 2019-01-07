@@ -120,7 +120,7 @@
                 
                         <input class="form-control form-control-sm m-3 w-75" type="text" placeholder="E-mail address" aria-label="Search" [(ngModel)]='mail' name="mail" [value]="mail">
                         
-                        <button class="btn btn-dark m-3" (click)="save('personalInfo')">Save</button>
+                        <button class="btn btn-dark m-3" (click)="save('personalInfo')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>
@@ -154,7 +154,7 @@
                         
                           
                       
-                     <button class="btn btn-dark m-3" (click)="save('typeOfApplication')">Save</button>
+                     <button class="btn btn-dark m-3" (click)="save('typeOfApplication')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>
@@ -199,8 +199,8 @@
                             </div>
                       </div>
                       <div class="col-sm-2">
-                          <button *ngIf="!education.editing" class="btn btn-success mt-3" (click)="editEducation(education)">Edit</button>
-                          <button *ngIf="education.editing" class="btn btn-warning mt-3" (click)="editSave(education)">Save</button>
+                          <button *ngIf="!education.editing" class="btn btn-success mt-3" (click)="editEducation(education)" [disabled]="disable">Edit</button>
+                          <button *ngIf="education.editing" class="btn btn-warning mt-3" (click)="editSave(education)" [disabled]="disable">Save</button>
                       </div>
                     </div>
                   
@@ -228,9 +228,9 @@
                             </div>
   
                           </div>
-                          <button class="btn btn-danger m-3" (click)="addEducation()">Add</button>
+                          <button class="btn btn-danger m-3" (click)="addEducation()" [disabled]="disable">Add</button>
                           <br>
-                        <button class="btn btn-dark m-3" (click)="save('education')">Save</button>
+                        <button class="btn btn-dark m-3" (click)="save('education')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>
@@ -283,8 +283,8 @@
                             </div>
                       </div>
                       <div class="col-sm-2">
-                          <button *ngIf="!work.editing" class="btn btn-success mt-3" (click)="editWork(work)">Edit</button>
-                          <button *ngIf="work.editing" class="btn btn-warning mt-3" (click)="editSaveWork(work)">Save</button>
+                          <button *ngIf="!work.editing" class="btn btn-success mt-3" (click)="editWork(work)" [disabled]="disable">Edit</button>
+                          <button *ngIf="work.editing" class="btn btn-warning mt-3" (click)="editSaveWork(work)" [disabled]="disable">Save</button>
                       </div>
                     </div>
                   
@@ -313,9 +313,9 @@
                             </div>
   
                           </div>
-                          <button class="btn btn-danger m-3" (click)="addWork()">Add</button>
+                          <button class="btn btn-danger m-3" (click)="addWork()" [disabled]="disable">Add</button>
                           <br>
-                        <button class="btn btn-dark m-3" (click)="save('work')">Save</button>
+                        <button class="btn btn-dark m-3" (click)="save('work')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>
@@ -348,7 +348,7 @@
                         <div class="col-sm-5">
                           
                               <span class="ml-3">Language #2</span> <br>
-                              <input class="form-control form-control-sm m-3 " type="text" placeholder=Name" aria-label="Search" [(ngModel)]='language2' name="language2" [value]="language2">
+                              <input class="form-control form-control-sm m-3 " type="text" placeholder="Name" aria-label="Search" [(ngModel)]='language2' name="language2" [value]="language2">
 
                            </div>
                         <div class="col-sm-5">  
@@ -381,7 +381,7 @@
                                 
                           </div>
                       </div>
-                       <button class="btn btn-dark m-3" (click)="save('language')">Save</button>
+                       <button class="btn btn-dark m-3" (click)="save('language')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>
@@ -399,7 +399,7 @@
                                   </div>
                             </div>
                           </div>
-                          <button class="btn btn-dark m-3" (click)="search()">Search</button>
+                          <button class="btn btn-dark m-3" (click)="save('additionalSkills')" [disabled]="disable">Save</button>
                       </form>
                      </div>
             </div>

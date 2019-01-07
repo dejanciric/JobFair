@@ -32,6 +32,7 @@ import cv from './models/cv';
 import Employed from './models/employed';
 import Package from './models/package';
 import CompanyRequest from './models/companyrequest';
+import Period from './models/period';
 
 import { Request } from 'express-serve-static-core';
 
@@ -553,6 +554,40 @@ router.route('/deleteReq').post((req, res)=>{
         }
     })
 })
+
+router.route('/readPeriods').get(
+    (req, res)=>{
+
+        Period.findOne({},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+
+router.route('/updatePeriods').post(
+    (req, res)=>{
+        let studentsFrom = req.body.studentsFrom;
+        let studentsTo = req.body.studentsTo;
+        let companiesFrom = req.body.companiesFrom;
+        let companiesTo = req.body.companiesTo;
+        Period.findOneAndUpdate({}, {'studentsFrom':studentsFrom,'studentsTo':studentsTo,'companiesFrom':companiesFrom,'companiesTo':companiesTo }, (err)=>{
+            if (err){
+                res.send(err);
+               // console.log("error");
+            }
+    
+            else{
+                res.json({ message: 'Period updated!'});
+                //console.log("alo");
+            }
+        })
+
+    }
+);
+
+
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

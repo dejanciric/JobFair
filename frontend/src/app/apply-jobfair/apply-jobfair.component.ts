@@ -4,6 +4,7 @@ import { Additional } from '../additional.model';
 import { UsersService } from '../users.service';
 import { Prilog2 } from '../prilog2.model';
 import { CompanyService } from '../company.service';
+import { Period } from '../periods.model';
 
 @Component({
   selector: 'app-apply-jobfair',
@@ -23,11 +24,26 @@ export class ApplyJobfairComponent implements OnInit {
   result:String="";
   comment:String="";
   alreadyApplied=false;
+  image:String="";
+  disable=false;
   constructor(private service:UsersService, private companyService:CompanyService) { }
 
   ngOnInit() {
       this.flag = false;
-      
+      this.image = this.service.getImage();
+      let currDate = new Date();
+      this.service.readPeriods().subscribe((p:Period)=>{
+        let f:string[] = p.studentsFrom.split("/");
+        let from = new Date(+f[2],+f[1]-1, +f[0]);
+    
+        let t:string[] = p.studentsTo.split("/");
+        let to = new Date(+t[2],+t[1]-1, +t[0]);
+    
+        if (currDate >= from && currDate <=  to)
+        this.disable = false;
+        else
+        this.disable = true;
+      })
       this.service.readCompanyRequests(this.companyService.companyName).subscribe((req:{"companyName":String, "title":String, "result":String, "comment":String}[])=>{
         if(req.length>0){
           this.title = req[0].title;

@@ -38,64 +38,59 @@
         </div>
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-11">
-            <div class="card" style="padding:10px;margin:20px; margin-right:30px;text-align:center;border-width: 5px">
-                <div class="card-header">
-                    <h4>
-                        <strong>
-                       Company Requests 
-                       </strong>
-                     
-                    </h4>
-                </div>
-                <div class="card-body" align="center" style="background-image: url('images/pattern1.png');">
-
-                    <table class="table table-hover">
-                        <thead>
-                          <tr>
-                           
-                            <th scope="col">Company name</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Result</th>
-                            <th scope="col">Comment</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let req of reqs">
+        <div class="row">
+            <div class="col-12">
+              <div class="jumbotron">
+                  
+                    <div class="row">
+                        <h2 class="m-3">Time period in witch students can submit CV</h2>
+                        <div  class="col-sm-5 m-3">
+                              
+                              <h6>From: (DD/MM/YYY)</h6>
+                              <input class="form-control form-control-sm " [value]="this.service.fromStudents" type="text" [(ngModel)]='this.service.fromStudents' name="this.service.fromStudents" >                          
+                             
+                            </div>
+                            <div   class="col-sm-5 m-3">
+                               <h6>To: (DD/MM/YYY)</h6>
+                                <input class="form-control form-control-sm " [value]="this.service.toStudents" type="text" [(ngModel)]='this.service.toStudents' name="this.service.toStudents" >                            
                           
-                            <td>{{req.companyName}}</td>
-                            <td>{{req.title}}</td>
-                            <td >
-                                <select class="custom-select" [(ngModel)]='req.result' name="req.result" >
-                                    <option value="TBA">TBA</option>
-                                    <option value="Accepted">Accept</option>
-                                    <option value="Rejected">Reject</option>
-                                  </select> 
-                            </td>
-                            <td style="width: 40%">
-                                <div *ngIf="req.result == 'Rejected'" >                          
-                                  <input class="form-control form-control-sm" type="text" placeholder="Comment" [(ngModel)]='req.comment' name="req.comment" [value]="req.comment">
-                                </div>
-                                <div *ngIf="req.result != 'Rejected'" >-</div>
-
-                            </td>
+                              </div>
+                          
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h2 class="m-3">Time period in witch companies can apply for JobFair</h2>
+                        <div  class="col-sm-5 m-3">
                             
-                          </tr>              
-                        </tbody>
-                      </table>
+                            <h6>From: (DD/MM/YYY)</h6>
+                            <input class="form-control form-control-sm " [value]="this.service.fromCompanies" type="text" [(ngModel)]='this.service.fromCompanies' name="this.service.fromCompanies" >                           
+                          
+                          </div>
+                          <div class="col-sm-5 m-3">
+                             <h6>To: (DD/MM/YYY)</h6>
+                              <input class="form-control form-control-sm " [value]="this.service.toCompanies" type="text" [(ngModel)]='this.service.toCompanies' name="this.service.toCompanies" >                            
+                        
+                            </div>
+                          
+                    </div>
+                
+              </div>
+              <div class="row">
+                  <div  align="center" class="col-12">
+                      <button  class="btn btn-primary" (click)="save()">Save</button>
                       
-                      <button class="btn btn-primary" (click)="save()">Save</button>
-                </div>
+                    </div>
+                    
+              </div>
+              <div *ngIf="success" class="alert alert-success mt-2" role="alert">
+                  Successfully updated periods
+                 </div>
             </div>
         </div>
+        
+    
     </div>
-</div>
+
     <br/>
     <br/>
     <footer class="page-footer font-small bg-dark pt-4 mt-4">

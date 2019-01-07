@@ -14,7 +14,12 @@ export class UsersService {
   loggedUsername:String="";
   loggedImage:String="";
   user = false;
-  
+  fromStudents:String="";
+  toStudents:String="";
+
+  fromCompanies:String="";
+  toCompanies:String="";
+
   constructor(private http: HttpClient) { 
     
 
@@ -363,5 +368,19 @@ export class UsersService {
         comment:comment
       }
       return this.http.post(`${this.uri}/deleteReq`, data);
+    }
+
+    readPeriods(){
+      return this.http.get(`${this.uri}/readPeriods`);
+    }
+
+    updatePeriods(studentsFrom, studentsTo, companiesFrom, companiesTo){
+      const data ={
+        studentsFrom: studentsFrom,
+        studentsTo:studentsTo,
+        companiesFrom:companiesFrom,
+        companiesTo:companiesTo
+      }
+      return this.http.post(`${this.uri}/updatePeriods`, data);
     }
 }

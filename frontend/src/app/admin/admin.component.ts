@@ -18,9 +18,12 @@ export class AdminComponent implements OnInit {
   additionals:Additional[]=[];
   prilog:Prilog2;
 
+  image:String="";
   constructor(private router:Router, private service:UsersService) { }
 
   ngOnInit() {
+    this.image = this.service.getImage();
+
     this.flag = false;
     this.service.readPackage().subscribe((p:Prilog2[])=>{
       if (p){

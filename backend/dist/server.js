@@ -27,6 +27,7 @@ const cv_1 = __importDefault(require("./models/cv"));
 const employed_1 = __importDefault(require("./models/employed"));
 const package_1 = __importDefault(require("./models/package"));
 const companyrequest_1 = __importDefault(require("./models/companyrequest"));
+const period_1 = __importDefault(require("./models/period"));
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -434,6 +435,30 @@ router.route('/deleteReq').post((req, res) => {
         }
         else {
             res.json({ message: 'req Deleted!' });
+        }
+    });
+});
+router.route('/readPeriods').get((req, res) => {
+    period_1.default.findOne({}, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/updatePeriods').post((req, res) => {
+    let studentsFrom = req.body.studentsFrom;
+    let studentsTo = req.body.studentsTo;
+    let companiesFrom = req.body.companiesFrom;
+    let companiesTo = req.body.companiesTo;
+    period_1.default.findOneAndUpdate({}, { 'studentsFrom': studentsFrom, 'studentsTo': studentsTo, 'companiesFrom': companiesFrom, 'companiesTo': companiesTo }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'Period updated!' });
+            //console.log("alo");
         }
     });
 });

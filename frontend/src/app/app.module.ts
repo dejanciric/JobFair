@@ -27,6 +27,7 @@ import { HiringComponent } from './hiring/hiring.component';
 import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
 import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 
 
@@ -51,7 +52,8 @@ import { CompanyRequestsComponent } from './company-requests/company-requests.co
     HiringComponent,
     ApplyJobfairComponent,
     ResultsCompanyComponent,
-    CompanyRequestsComponent
+    CompanyRequestsComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

@@ -136,7 +136,7 @@
               </div>
               <div class="row">
                   <div  align="center" class="col-12">
-                      <button *ngIf="!alreadyApplied"  class="btn btn-primary" (click)="apply()">Apply</button>
+                      <button *ngIf="!alreadyApplied"  class="btn btn-primary" (click)="apply()" [disabled]="disable">Apply</button>
                       
                     </div>
                     

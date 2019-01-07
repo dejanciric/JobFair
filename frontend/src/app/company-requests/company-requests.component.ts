@@ -9,10 +9,13 @@ import { UsersService } from '../users.service';
 export class CompanyRequestsComponent implements OnInit {
 
   reqs:{"companyName":String, "title":String, "result":String, "comment":String}[];
+  image:String="";
 
   constructor(private service:UsersService) { }
 
   ngOnInit() {
+    this.image = this.service.getImage();
+
     this.service.readAllRequests().subscribe((r:{"companyName":String, "title":String, "result":String, "comment":String}[])=>{
       this.reqs = r;
     })
