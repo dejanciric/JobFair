@@ -198,10 +198,14 @@ export class NewJobfairComponent implements OnInit {
 
   end(){
     this.service.deletePackages().subscribe(()=>{
-      this.service.updateSlot("-1", []).subscribe(()=>{
-        this.service.deleteJobfair().subscribe(()=>{
-          this.active = false;
-        })
+      this.service.resetAllSlots().subscribe(()=>{
+       
+          this.service.deleteCompanyReqs().subscribe(()=>{
+            this.service.deleteJobfair().subscribe(()=>{
+              this.active = false;
+            })
+          })
+       
       })
     })
   }

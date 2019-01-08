@@ -20,6 +20,7 @@ export class CompanyRequestsComponent implements OnInit {
   ngOnInit() {
     this.flag = false;
     this.image = this.service.getImage();
+    this.companies = [];
 
     this.service.readAllRequests().subscribe((r:{"companyName":String, "title":String, "result":String, "comment":String}[])=>{
       if (r.length > 0){
@@ -28,7 +29,7 @@ export class CompanyRequestsComponent implements OnInit {
         this.reqs=[];
         this.service.readSchedule().subscribe((sch:{"companies":String[]})=>{
           this.schedule = sch.companies;
-          console.log(this.schedule);
+          //console.log(this.schedule);
           this.showSchedule();
         })
        this.service.readAcceptedRequests().subscribe((cr:{"companyName":String, "title":String, "result":String, "comment":String}[])=>{

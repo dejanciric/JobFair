@@ -728,6 +728,42 @@ router.route('/deleteJobfair').get((req, res)=>{
     
 });
 
+router.route('/deleteSlots').get((req, res)=>{
+
+    Slot.deleteMany({},(err)=>{
+        if(err) console.log(err);
+        else{
+            res.json({ message: 'Slots Deleted!'});
+           
+        }
+    })
+    
+});
+
+router.route('/deleteCompanyReqs').get((req, res)=>{
+
+    CompanyRequest.deleteMany({},(err)=>{
+        if(err) console.log(err);
+        else{
+            res.json({ message: 'CompanyRequests Deleted!'});
+           
+        }
+    })
+    
+});
+
+router.route('/resetAllSlots').get((req, res)=>{
+
+    Slot.updateMany({},{"slot":[]},(err)=>{
+        if(err) console.log(err);
+        else{
+            res.json({ message: 'CompanyRequests Deleted!'});
+           
+        }
+    })
+    
+});
+
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

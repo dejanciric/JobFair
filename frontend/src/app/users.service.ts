@@ -459,4 +459,19 @@ export class UsersService {
     deleteJobfair(){
       return this.http.get(`${this.uri}/deleteJobfair`);
     }
+
+    deleteSlots(){
+      return this.http.get(`${this.uri}/deleteSlots`);
+
+    }
+
+    deleteCompanyReqs(){
+      return this.http.get(`${this.uri}/deleteCompanyReqs`);
+
+    }
+
+
+    resetAllSlots(){
+      return this.http.get(`${this.uri}/resetAllSlots`);
+    }
 }
