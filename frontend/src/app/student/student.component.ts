@@ -215,7 +215,12 @@ export class StudentComponent implements OnInit {
       this.language1knowladge,
       this.language2knowladge,
       this.language3knowladge ).subscribe(()=>{
-
+        this.personalInfo = false;
+        this.typeOfApplication = false;
+        this.education=false;
+        this.workExperience=false;
+        this.languages = false;
+        this.additionalSkills = false;
       });
   }
 

@@ -149,7 +149,9 @@ export class CompanyRegistrationComponent implements OnInit {
         }else{
           this.service.registerCompany(this.username, this.password, this.firstname, this.lastname, this.companyName, this.mail, this.city, this.address, this.PIB, this.employeeNumber, this.webSite, this.work, this.special).subscribe(()=>{
             this.service.uploadFile(this.selectedFile).subscribe(()=>{
-              this.router.navigate(['/login']);
+              this.service.saveSlot(this.companyName).subscribe(()=>{
+                this.router.navigate(['/login']);
+              })
             });
           })
         }

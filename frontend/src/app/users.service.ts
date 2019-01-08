@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { last } from '@angular/router/src/utils/collection';
 import { Observable } from 'rxjs';
+import { Jobfair } from './jobfair.model';
 
 
 @Injectable({
@@ -332,6 +333,13 @@ export class UsersService {
       return this.http.post(`${this.uri}/readAllRequests`, data);
     }
 
+    readAcceptedRequests(){
+      const data ={
+        companyName: ""
+      }
+      return this.http.post(`${this.uri}/readAcceptedRequests`, data);
+    }
+
     saveRequest(companyName, title, result){
       const data ={
         companyName: companyName,
@@ -382,5 +390,73 @@ export class UsersService {
         companiesTo:companiesTo
       }
       return this.http.post(`${this.uri}/updatePeriods`, data);
+    }
+
+    saveSchedule(companies){
+      const data ={
+        companies: companies
+      }
+      return this.http.post(`${this.uri}/saveSchedule`, data);
+    }
+
+    readSchedule(){
+      return this.http.get(`${this.uri}/readSchedule`);
+    }
+
+    readAllSlots(){
+      return this.http.get(`${this.uri}/readAllSlots`);
+
+    }
+
+    readCompanySlots(companyName){
+      const data ={
+        companyName: companyName
+      }
+      return this.http.post(`${this.uri}/readCompanySlots`, data);
+    }
+
+    updateSlot(companyName, slots){
+      const data ={
+        companyName: companyName,
+        slot: slots
+      }
+      return this.http.post(`${this.uri}/updateSlot`, data);
+    }
+    
+    saveSlot(companyName){
+      const data ={
+        companyName: companyName,
+        slot: []
+      }
+      return this.http.post(`${this.uri}/saveSlot`, data);
+    }
+
+    saveNewSlot(companyName, slot){
+      const data ={
+        companyName: companyName,
+        slot:slot
+      }
+      return this.http.post(`${this.uri}/saveNewSlot`, data);
+    }
+
+    getJobfair(){
+      return this.http.get(`${this.uri}/getJobfair`);
+
+    }
+
+    saveJobfair(jobfair:Jobfair){
+      const data ={
+        Fair: jobfair.Fair,
+        StartDate:jobfair.StartDate,
+        EndDate: jobfair.EndDate,
+        StartTime:jobfair.StartTime,
+        EndTime: jobfair.EndTime,
+        About:jobfair.About,
+        Place:jobfair.Place
+      }
+      return this.http.post(`${this.uri}/saveJobfair`, data);
+    }
+    deleteJobfair(){
+      return this.http.get(`${this.uri}/deleteJobfair`);
     }
 }

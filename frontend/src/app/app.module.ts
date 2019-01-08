@@ -28,6 +28,11 @@ import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
 import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { CompanyOverviewComponent } from './company-overview/company-overview.component';
+import { NewJobfairComponent } from './new-jobfair/new-jobfair.component';
+import {MatStepperModule, MatIconModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -53,14 +58,19 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     ApplyJobfairComponent,
     ResultsCompanyComponent,
     CompanyRequestsComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    CompanyOverviewComponent,
+    NewJobfairComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    MatStepperModule,
+    MatIconModule,
+    BrowserAnimationsModule       
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]

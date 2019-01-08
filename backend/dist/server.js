@@ -28,6 +28,9 @@ const employed_1 = __importDefault(require("./models/employed"));
 const package_1 = __importDefault(require("./models/package"));
 const companyrequest_1 = __importDefault(require("./models/companyrequest"));
 const period_1 = __importDefault(require("./models/period"));
+const schedule_1 = __importDefault(require("./models/schedule"));
+const slot_1 = __importDefault(require("./models/slot"));
+const jobfair_1 = __importDefault(require("./models/jobfair"));
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -389,6 +392,55 @@ router.route('/readAllRequests').post((req, res) => {
             res.json(cr);
     });
 });
+router.route('/readAcceptedRequests').post((req, res) => {
+    companyrequest_1.default.find({ "result": "Accepted" }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/readAllSlots').get((req, res) => {
+    slot_1.default.findOne({ "companyName": "-1" }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/readCompanySlots').post((req, res) => {
+    let companyName = req.body.companyName;
+    slot_1.default.findOne({ "companyName": companyName }, (err, cr) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(cr);
+    });
+});
+router.route('/updateSlot').post((req, res) => {
+    let companyName = req.body.companyName;
+    let slot = req.body.slot;
+    slot_1.default.findOneAndUpdate({ 'companyName': companyName }, { 'slot': slot }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'Slot updated!' });
+            //console.log("alo");
+        }
+    });
+});
+router.route('/saveSlot').post((req, res) => {
+    let slot = new slot_1.default(req.body);
+    //console.log(packagee);
+    slot.save().
+        then(slot => {
+        res.status(200).json({ 'slot': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'slot': 'no' });
+    });
+});
 router.route('/saveRequest').post((req, res) => {
     let cr = new companyrequest_1.default(req.body);
     //console.log(packagee);
@@ -459,6 +511,64 @@ router.route('/updatePeriods').post((req, res) => {
         else {
             res.json({ message: 'Period updated!' });
             //console.log("alo");
+        }
+    });
+});
+router.route('/readSchedule').get((req, res) => {
+    schedule_1.default.findOne({}, (err, s) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(s);
+    });
+});
+router.route('/saveSchedule').post((req, res) => {
+    let companies = req.body.companies;
+    schedule_1.default.findOneAndUpdate({}, { 'companies': companies }, (err) => {
+        if (err) {
+            res.send(err);
+            // console.log("error");
+        }
+        else {
+            res.json({ message: 'Schedule updated!' });
+            //console.log("alo");
+        }
+    });
+});
+router.route('/saveNewSlot').post((req, res) => {
+    let slot = new slot_1.default(req.body);
+    //console.log(packagee);
+    slot.save().
+        then(slot => {
+        res.status(200).json({ 'slot': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'slot': 'no' });
+    });
+});
+router.route('/saveJobfair').post((req, res) => {
+    let jobfair = new jobfair_1.default(req.body);
+    //console.log(packagee);
+    jobfair.save().
+        then(jobfair => {
+        res.status(200).json({ 'jobfair': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'jobfair': 'no' });
+    });
+});
+router.route('/getJobfair').get((req, res) => {
+    jobfair_1.default.findOne({}, (err, s) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(s);
+    });
+});
+router.route('/deleteJobfair').get((req, res) => {
+    jobfair_1.default.deleteMany({}, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            res.json({ message: 'Jobfair Deleted!' });
         }
     });
 });

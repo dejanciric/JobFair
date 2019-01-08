@@ -1,0 +1,543 @@
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light bg-dark m-3 rounded" >
+    
+    <img class="p-0 m-0 rounded" src="../../assets/img/logo1.png " height="40" alt="Festival Logo" >
+ 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/adminHome">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/admin">Packages</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Company requests</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/companyOverview">Company overview</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/newJobfair">New JobFair</a>
+                        </li>
+                    </ul>
+            
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <img class="p-0 m-2 rounded" [src]="image" height="40" >
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a  class="nav-link text-light m-2" routerLink="/login">Logout</a>
+                        </li>
+                    </ul>
+                
+        </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+                <mat-horizontal-stepper *ngIf="!active">
+                        <mat-step>
+                          <!-- ovde popunjavanje iz json za jobfair-->
+                          <div class="jumbotron">
+                  
+                                <div class ="row">
+                                  <div class="col-sm-10" >
+                                      <h3 class="mb-3">JobFair details</h3>
+              
+                                      <hr>
+                                      <div class="row">
+                                          <div class="col-sm-9">
+                                              Title:
+                                              <input class="form-control form-control-sm mb-2" [value]="jobfair.Fair" type="text" [(ngModel)]='jobfair.Fair' name="jobfair.Fair" >
+                                            </div>
+                                      </div>
+                                      <div class="row">
+                                            <div class="col-sm-5">
+                                                Start Date: (DD/MM/YYY)
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='jobfair.StartDate' name="jobfair.StartDate" [value]="jobfair.StartDate">
+                      
+                                            </div>
+                                            <div  class="col-sm-6">
+                                                End Date: (DD/MM/YYY)
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='jobfair.EndDate' name="jobfair.EndDate" [value]="jobfair.EndDate">
+                      
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-sm-5">
+                                                   Start Time: (HH:MM:SS)
+                                                    <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='jobfair.StartTime' name="jobfair.StartTime" [value]="jobfair.StartTime">
+                          
+                                                </div>
+                                                <div  class="col-sm-6">
+                                                   End Time: (HH:MM:SS)
+                                                    <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='jobfair.EndTime' name="jobfair.EndTime" [value]="jobfair.EndTime">
+                          
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-sm-5">
+                                                       Place:
+                                                        <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='jobfair.Place' name="jobfair.Place" [value]="jobfair.Place">
+                              
+                                                    </div>
+                                                    <div  class="col-sm-6">
+                                                      About:
+                                                        <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='jobfair.About' name="jobfair.About" [value]="jobfair.About">
+                              
+                                                    </div>
+                                                </div>
+                                     Locations:
+                                      <div class="row" *ngFor="let location of locations">
+                                          <div class="col-sm-9">
+                                             
+                                              <input class="form-control form-control-sm mb-2" [value]="location.Name" type="text" [(ngModel)]='location.Name' name="location.Name" >
+                                            </div>
+                                      </div><br>
+                                      <button class="btn btn-primary mt-2 mb-2" (click)="addLocation()">Add location</button>
+                                    
+                                      <div class="row">
+                                            <div  align="center" class="col-sm-10">
+                                                <div class="custom-file m-4" style="width: 300px">
+                                                    <input type="file" class="custom-file-input" id="customFile" (change)="onJobfairFileSelected($event)">
+                                                    <label class="custom-file-label" for="customFile">Load JSON file</label>
+                                                    <p style="color: red">{{message}}</p>
+                                                </div>
+                                              </div>
+                                              
+                                        </div>
+                                        
+                                    
+                                  
+                                 
+                                </div>
+                                    
+                                    
+              
+                                  </div>
+                                 
+                                  
+                              
+                            </div>
+                          <div align="center">
+                            <button  lass="btn btn dark m-3" mat-button matStepperNext>Next</button>
+                          </div>
+                        </mat-step>
+                        <mat-step>
+                        <!-- ovde popunjavanje logo i satnice za sta i gde-->
+                        <div class="jumbotron">
+                  
+                                <div class ="row">
+                                  <div class="col-sm-12" >
+                                      <h3 class="mb-3">Slots:</h3>
+              
+                                      <hr>
+                                      
+                                   
+                                     
+                                      <div class="row" *ngFor="let slot of slots">
+                                          <div class="col-sm-2">
+                                            Start time:
+                                              <input class="form-control form-control-sm "placeholder="HH:MM:SS"  [value]="slot.startTime" type="text" [(ngModel)]='slot.startTime' name="slot.startTime" >
+                                            
+                                            </div>
+                                            <div class="col-sm-2">
+                                             End time: 
+                                                    <input class="form-control form-control-sm " placeholder="HH:MM:SS"  [value]="slot.endTime" type="text" [(ngModel)]='slot.endTime' name="slot.endTime" >
+                                                  
+                                                  </div>
+                                            <div class="col-sm-3">
+                                             Type:
+                                                    <select class="custom-select" [(ngModel)]='slot.type' name="slot.type" >
+                                                            <option value="Lesson">Lesson</option>
+                                                            <option value="Workchop">Workchop</option>
+                                                            <option value="Presentation">Presentation</option>
+                                                    </select> 
+                                            
+                                            </div>
+                                            <div class="col-sm-5">
+                                                Place:
+                                                    <select class="custom-select" [(ngModel)]='slot.place' name="slot.place" >
+                                                            <option *ngFor=" let location of locations" [value]="location.Name">{{location.Name}}</option>
+                                                            
+                                                    </select>                                            
+                                            </div>
+                                            
+                                      </div><br>
+                                      <button class="btn btn-primary mt-2 mb-2" (click)="addSlot()">Add slot</button>
+                                    <hr>
+                                    <div class="row">
+                                            <div  align="center" class="col-sm-10">
+                                                <div class="custom-file m-4" style="width: 300px">
+                                                    <input type="file" class="custom-file-input" id="customFile" (change)="onLogoSelected($event)">
+                                                    <label class="custom-file-label" for="customFile">Load logo</label>
+                                                </div>
+                                              </div>
+                                              <img *ngIf="logo!=''" [src]="logo" style="width: 100px; height: 100px;">
+                                        </div>
+                                    
+                                    
+                                  
+                                 
+                                </div>
+                                    
+                                    
+              
+                                  </div>
+                                 
+                                  
+                              
+                            </div>
+                            <div align="center">
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </mat-step>
+                        <mat-step>
+                            <!-- ovde popunjavanje iz json sto vec imam-->
+                            <div class="jumbotron">
+                  
+                                    <div class ="row">
+                                      <div class="col-sm-5" >
+                                          <h3 class="mb-3">Packages</h3>
+                                        <div *ngFor="let package of packages">
+                  
+                                          <hr>
+                                          <div class="row">
+                                              <div class="col-sm-10">
+                                                  Title:
+                                                  <input class="form-control form-control-sm mb-2" [value]="package.Title" type="text" [(ngModel)]='package.Title' name="package.Title" >
+                                                </div>
+                                          </div>
+                                          Content:
+                                          <div class="row" *ngFor="let content of package.Content">
+                                              <div class="col-sm-10">
+                                                 
+                                                  <input class="form-control form-control-sm " [value]="content" type="text" [(ngModel)]='content' name="content" >
+                                                </div>
+                                          </div>
+                                          <button class="btn btn-primary mt-2 mb-2" (click)="addContent(package)">Add content</button>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                Video Promotion Minutes:
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.VideoPromotion' name="package.VideoPromotion" [value]="package.VideoPromotion">
+                      
+                                            </div>
+                                            <div  class="col-sm-6">
+                                                Lessons Number
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.NoLessons' name="package.NoLessons" [value]="package.NoLessons">
+                      
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                Workchops Number
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text" [(ngModel)]='package.NoWorkchops' name="package.NoWorkchops" [value]="package.NoWorkchops">
+                      
+                                            </div>
+                                            <div  class="col-sm-6">
+                                                Presentation Number
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.NoPresentation' name="package.NoPresentation" [value]="package.NoPresentation">
+                      
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                Price:
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.Price' name="package.Price" [value]="package.Price">
+                      
+                                            </div>
+                                            <div  class="col-sm-6">
+                                                Max Num of Companies:
+                                                <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.MaxCompanies' name="package.MaxCompanies" [value]="package.MaxCompanies">
+                      
+                                            </div>
+                                        </div>
+                                        
+                                      </div>
+                                      <button  class="btn btn-danger" (click)="add()">Add package</button>
+                                     
+                                    </div>
+                                        
+                                        <div  class="col-sm-7">
+                                            <h3 class="mb-3">Additional</h3>
+                                            <div class="row" *ngFor="let additional of additionals">
+                  
+                                                <div class="col-sm-9">
+                                                    Title:
+                                                    <input class="form-control form-control-sm mb-3 w-75" type="text" [(ngModel)]='additional.Title' name="additional.Title" [value]="additional.Title">
+                          
+                                                </div>
+                                                <div  class="col-sm-3">
+                                                    Price:
+                                                    <input class="form-control form-control-sm mb-3 w-75" type="text"  [(ngModel)]='additional.Price' name="additional.Price" [value]="additional.Price">
+                          
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div  class="col-sm-7">
+                                                    <button  class="btn btn-danger" (click)="addAdditional()">Add additional</button>
+                                                  </div>
+                                                  
+                                            </div>
+                                        </div>
+                                        
+                  
+                                      </div>
+                                      <div class="row">
+                                          <div  align="center" class="col-sm-12">
+                                              <div class="custom-file m-4" style="width: 300px">
+                                                  <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
+                                                  <label class="custom-file-label" for="customFile">Load JSON file</label>
+                                                  <p style="color: red">{{message2}}</p>
+                                              </div>
+                                            </div>
+                                            
+                                      </div>
+                                      
+                                  
+                                </div>
+                            <div align="center">
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext >Next</button>
+                            </div>
+                        </mat-step>
+                        <mat-step>
+                            <!-- ovde ispis svega od ranije samo-->
+                            <div class="jumbotron">
+                  
+                                    <div class ="row">
+                                            <div class="col-sm-4" >
+                                                    <h3 class="mb-3">JobFair details</h3>
+                            
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div >
+                                                            <b>Title:</b>
+                                                            {{jobfair.Fair}}
+                                                          </div>
+                                                    </div>
+                                                    <div class="row">
+                                                          <div >
+                                                                <b>Start Date:</b>
+                                                              {{jobfair.StartDate}}
+                                    
+                                                          </div>
+                                                          
+                                                      </div>
+                                                      <div class="row">
+                                                            <div  >
+                                                                    <b>End Date:</b>
+                                                                    {{jobfair.EndDate}}
+                                            
+                                                                  </div>
+                                                            
+                                                        </div>
+                                                      <div class="row">
+                                                              <div >
+                                                                    <b>Start Time:</b> 
+                                                                  {{jobfair.StartTime}}
+                                        
+                                                              </div>
+                                                              
+                                                          </div>
+                                                          <div class="row">
+                                                                
+                                                                <div  >
+                                                                      <b>End Time:</b>
+                                                                  {{jobfair.EndTime}}
+                                          
+                                                                </div>
+                                                            </div>
+                                                          <div class="row">
+                                                                  <div >
+                                                                        <b>Place:</b>
+                                                                     {{jobfair.Place}}
+                                            
+                                                                  </div>
+                                                                  <div  >
+                                                                        <b>About:</b>
+                                                                      {{jobfair.About}}
+                                                                  </div>
+                                                              </div><br>
+                                                              <b>Locations:</b>
+                                                    <div class="row" *ngFor="let location of locations">
+                                                        <div >
+                                                           
+                                                            {{location.Name}}
+                                                          </div>
+                                                    </div><br>
+                                                    
+                     
+                                              </div>
+                                              <div class ="col-sm-4">
+                                                   
+                                                        <h3 class="mb-3">Packages</h3>
+                                                      <div *ngFor="let package of packages">
+                                
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div >
+                                                                <b>Title:</b>
+                                                                {{package.Title}}
+                                                              </div>
+                                                        </div>
+                                                        <b> Content:</b>
+                                                        <div class="row" *ngFor="let content of package.Content">
+                                                            <div>
+                                                               
+                                                                 {{content}}
+                                                              </div>
+                                                        </div>
+                                                      <div class="row">
+                                                          <div  class="col-sm-12">
+                                                                <b>Video Promotion Minutes:</b>
+                                                              {{package.VideoPromotion}}
+                                    
+                                                          </div>
+                                                          <div   class="col-sm-12">
+                                                                <b>Lessons Number:</b>
+                                                              {{package.NoLessons}}
+                                    
+                                                          </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-sm-12" >
+                                                                <b> Workchops Number:</b>
+                                                              {{package.NoWorkchops}}
+                                    
+                                                          </div>
+                                                          <div  class="col-sm-12" >
+                                                                <b>Presentation Number:</b>
+                                                              {{package.NoPresentationNo}}
+                                    
+                                                          </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div  class="col-sm-12">
+                                                                <b>Price:</b>
+                                                             {{ package.Price}}
+                                    
+                                                          </div>
+                                                          <div  class="col-sm-12" >
+                                                                <b>Max Num of Companies:</b>
+                                                              {{package.MaxCompanies}}
+                                    
+                                                          </div>
+                                                      </div>
+                                                      
+                                                    </div>
+                                                   
+                                                    <hr>
+                                                          <h3 class="mb-3">Additional</h3>
+                                                         
+                                                          <div class="row" *ngFor="let additional of additionals">
+                                                                
+                                                                <div class="col-sm-12">
+                                                                        <b>Title:</b>
+                                                                        {{additional.Title}}
+                                                                </div>
+                                                                <div class="col-sm-12 mb-2">
+                                                                        <b>Price:</b>
+                                                                        {{additional.Price}}
+                                                                    </div>
+                                                            
+                                                          </div>
+                     
+                                                    </div>
+                                      <div class="col-sm-4" >
+                                          <h3 class="mb-3">Slots:</h3>
+                  
+                                          
+                                          
+                                          <div *ngFor="let slot of slots">
+                                                <hr>
+                                                <div class="row">
+                                                        <div class="col-sm-12">
+                                                                <b>Start time:</b>
+                                                                  {{slot.startTime}}
+                                                                
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                        <b>End time:</b>
+                                                                        {{slot.endTime}}
+                
+                                                                      
+                                                                      </div>
+                                                                <div class="col-sm-12">
+                                                                        <b>Type:</b>
+                                                                        {{slot.type}}
+                                                                
+                                                                </div>
+                                                                <div class="col-sm-12 mb-2">
+                                                                        <b>Place:</b>
+                                                                        {{slot.place}}
+                                                                                                                
+                                                                </div>
+                                                </div>
+
+                                                
+                                                
+                                          </div><br>
+                                          <div >
+                                                <b>Logo: </b>
+                                                <img *ngIf="logo!=''" [src]="logo" style="width: 100px; height: 100px;">
+                                                                                            
+                                            </div>
+
+                                    </div>
+        
+                  
+                                      </div>
+                                     
+                                      
+                                  
+                                </div>
+                            <div align="center">
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext (click)="finish()">Finish</button>
+                            </div>
+                            </mat-step>
+                      </mat-horizontal-stepper>
+                      <div class ="jumbotron" *ngIf="active">
+                            <div class ="row">
+                                    <div class="col-sm-10" >
+                                       <p> Jobfair <b>{{jobfairTitle}}</b> about <b>{{about}}</b> currently active</p><br>
+                                       From <b>{{startDate}}</b> till <b>{{endDate}}</b><br>
+                                       Everyday between <b>{{startTime}}</b> and <b>{{endTime}}</b><br>
+                                       At <b>{{place}}</b>
+                                      <br>
+                                      <button class="btn btn-danger mt-3" (click)="end()">End jobfair</button>
+
+                                  </div>
+                                 
+                                      
+                                      
+                
+                                    </div>
+                      </div>
+                      
+        </div>
+    </div>
+</div>
+    <br/>
+    <br/>
+    <footer class="page-footer font-small bg-dark pt-4 mt-4">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-sm-6"><img class="m-3" src="../../assets/img/logo1.png" align="left" width="350px" height="90px" float="left"></div>
+                <div class="col-sm-6">
+                    
+                        <p  style="color:white; padding-bottom:1px; margin-bottom:1px; padding-top:1px; margin-top:15px;">
+                            <i>Copyright &copy; 2019 Faculty of Electrical Engineering University of Belgrade <br>department Software Engineering<br>Developed by <b>Ćirić Dejan</b> </i>
+                        </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>

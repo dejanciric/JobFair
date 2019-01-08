@@ -12,16 +12,16 @@
                             <a  class="nav-link text-light m-2" routerLink="/adminHome">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/admin">Define packages</a>
+                            <a  class="nav-link text-light m-2" routerLink="/admin">Packages</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Companiy requests</a>
+                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Company requests</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/studentOffers">Offers</a>
+                            <a  class="nav-link text-light m-2" routerLink="/companyOverview">Company overview</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/results">Application results</a>
+                            <a  class="nav-link text-light m-2" routerLink="/newJobfair">New JobFair</a>
                         </li>
                     </ul>
             
@@ -43,113 +43,86 @@
               <div class="jumbotron">
                   
                   <div class ="row">
-                    <div class="col-sm-5" >
+                    <div class="col-sm-8" >
                         <h3 class="mb-3">Packages</h3>
-                      <div *ngFor="let package of packages">
-
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-10">
-                                Title:
-                                <input class="form-control form-control-sm mb-2" [value]="package.Title" type="text" [(ngModel)]='package.Title' name="package.Title" >
-                              </div>
-                        </div>
-                        Content:
-                        <div class="row" *ngFor="let content of package.Content">
-                            <div class="col-sm-10">
-                               
-                                <input class="form-control form-control-sm " [value]="content" type="text" [(ngModel)]='content' name="content" >
-                              </div>
-                        </div>
-                        <button class="btn btn-primary mt-2 mb-2" (click)="addContent(package)">Add content</button>
-                      <div class="row">
-                          <div class="col-sm-5">
-                              Video Promotion Minutes:
-                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.VideoPromotion' name="package.VideoPromotion" [value]="package.VideoPromotion">
-    
-                          </div>
-                          <div  class="col-sm-6">
-                              Lessons Number
-                              <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.NoLessons' name="package.NoLessons" [value]="package.NoLessons">
-    
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-5">
-                              Workchops Number
-                              <input class="form-control form-control-sm mb-2 w-75" type="text" [(ngModel)]='package.NoWorkchops' name="package.NoWorkchops" [value]="package.NoWorkchops">
-    
-                          </div>
-                          <div  class="col-sm-6">
-                              Presentation Number
-                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.NoPresentation' name="package.NoPresentation" [value]="package.NoPresentation">
-    
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-5">
-                              Price:
-                              <input class="form-control form-control-sm mb-2 w-75" type="text"  [(ngModel)]='package.Price' name="package.Price" [value]="package.Price">
-    
-                          </div>
-                          <div  class="col-sm-6">
-                              Max Num of Companies:
-                              <input class="form-control form-control-sm mb-2 w-75" type="text"   [(ngModel)]='package.MaxCompanies' name="package.MaxCompanies" [value]="package.MaxCompanies">
-    
-                          </div>
-                      </div>
+                      <div *ngFor="let package of packages">
+                            <div class="card" style="padding:10px;margin:20px; margin-right:30px;;border-width: 5px">
+                            
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <b>Title:</b>
+                                                {{package.Title}}
+                                            </div>
+                                        </div>
+                                        <b>Content:</b>
+                                        <div class="row" *ngFor="let content of package.Content">
+                                            <div class="col-sm-10">
+                                    
+                                                {{ content}}
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                                <div class="col-sm-5">
+                                                        <b>Video Promotion Minutes:</b>
+                                                        {{package.VideoPromotion}}
+                              
+                                                    </div>
+                                                    <div  class="col-sm-6">
+                                                            <b>Lessons Number:</b>
+                                                        {{package.NoLessons}}
+                              
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                                    <div class="col-sm-5">
+                                                            <b>Workchops Number:</b>
+                                                        {{package.NoWorkchops}}
+                              
+                                                    </div>
+                                                    <div  class="col-sm-6">
+                                                            <b>Presentation Number:</b>
+                                                        {{package.NoPresentation}}
+                              
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-sm-5">
+                                                        <b>Price:</b>
+                                                    {{package.Price}}
+                          
+                                                </div>
+                                                <div  class="col-sm-6">
+                                                        <b>Max Num of Companies:</b>
+                                                       <span *ngIf="!canEdit"> {{package.MaxCompanies}} </span>
+                                                       <input *ngIf="canEdit" class="form-control form-control-sm " style="width:100px" [value]="package.MaxCompanies" type="text" [(ngModel)]='package.MaxCompanies' name="package.MaxCompanies" >                          
+                                                    
+                          
+                                                </div>
+                                    </div>
+
+                                    </div>
+                            </div>
+   
                       
                     </div>
-                    <button  class="btn btn-danger" (click)="add()">Add package</button>
+                    
                    
                   </div>
                       
-                      <div  class="col-sm-7">
-                          <h3 class="mb-3">Additional</h3>
-                          <div class="row" *ngFor="let additional of additionals">
-
-                              <div class="col-sm-9">
-                                  Title:
-                                  <input class="form-control form-control-sm mb-3 w-75" type="text" [(ngModel)]='additional.Title' name="additional.Title" [value]="additional.Title">
-        
-                              </div>
-                              <div  class="col-sm-3">
-                                  Price:
-                                  <input class="form-control form-control-sm mb-3 w-75" type="text"  [(ngModel)]='additional.Price' name="additional.Price" [value]="additional.Price">
-        
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div  class="col-sm-7">
-                                  <button  class="btn btn-danger" (click)="addAdditional()">Add additional</button>
-                                </div>
-                                
-                          </div>
-                      </div>
-                      
-
                     </div>
-                    <div class="row">
-                        <div  align="center" class="col-sm-12">
-                            <div class="custom-file m-4" style="width: 300px">
-                                <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelected($event)">
-                                <label class="custom-file-label" for="customFile">Load from file</label>
-                            </div>
-                          </div>
-                          
-                    </div>
-                    
-                
+    
               </div>
               <div class="row">
                   <div  align="center" class="col-12">
-                      <button  class="btn btn-primary" (click)="save()">Save</button>
+                      <button [disabled]="!canEdit"  class="btn btn-primary" (click)="save()">Save</button>
                       
                     </div>
                     
               </div>
               <div *ngIf="flag" class="alert alert-success mt-2" role="alert">
-                  Successfully saved packages and additionals
+                  Successfully updated packages
                  </div>
             </div>
         </div>

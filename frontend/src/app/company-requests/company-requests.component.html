@@ -12,16 +12,16 @@
                             <a  class="nav-link text-light m-2" routerLink="/adminHome">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/admin">Define packages</a>
+                            <a  class="nav-link text-light m-2" routerLink="/admin">Packages</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Companiy requests</a>
+                            <a  class="nav-link text-light m-2" routerLink="/companyRequests">Company requests</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/studentOffers">Offers</a>
+                            <a  class="nav-link text-light m-2" routerLink="/companyOverview">Company overview</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a  class="nav-link text-light m-2" routerLink="/results">Application results</a>
+                            <a  class="nav-link text-light m-2" routerLink="/newJobfair">New JobFair</a>
                         </li>
                     </ul>
             
@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="col-sm-11">
-            <div class="card" style="padding:10px;margin:20px; margin-right:30px;text-align:center;border-width: 5px">
+            <div *ngIf="reqs.length > 0" class="card" style="padding:10px;margin:20px; margin-right:30px;text-align:center;border-width: 5px">
                 <div class="card-header">
                     <h4>
                         <strong>
@@ -93,7 +93,103 @@
                       <button class="btn btn-primary" (click)="save()">Save</button>
                 </div>
             </div>
+            <div *ngIf="reqs.length == 0" class="card" style="padding:10px;margin:20px; margin-right:30px;text-align:center;border-width: 5px">
+              
+                    <div class="card-header">
+                        <h4>
+                            <strong>
+                                Schedule Stalls
+                           </strong>
+                         
+                        </h4>
+                    </div>
+                    <div class="card-body" align="center" style="background-image: url('images/pattern1.png');">
+                      <div class="row">
+                          <div class="col-sm-9">
+                              <table >
+                                  <tr>
+                                    <td> <button id="1" class="btn btn-danger btnFix" (click)="btnClick('1')"></button></td>
+                                    <td> <button id="2" class="btn btn-danger btnFix" (click)="btnClick('2')"></button></td>
+                                    <td> <button id="3" class="btn btn-danger btnFix" (click)="btnClick('3')"></button></td>
+                                    <td> <button id="4" class="btn btn-danger btnFix" (click)="btnClick('4')"></button></td>
+                                    <td> <button id="5" class="btn btn-danger btnFix" (click)="btnClick('5')"></button></td>
+                                    <td> <button id="24" class="btn btn-danger btnFix" (click)="btnClick('24')"></button></td>
+                                  </tr>
+                                  <tr>
+                                      <td> <button id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+                                      <td> <button style="visibility: hidden" id="5" class="btn btn-danger btnFix" (click)="btnClick('5')"></button></td>
+                                      <td> <button id="7" class="btn btn-danger btnFix" (click)="btnClick('7')"></button></td>
+            
+                                  </tr>
+                                  <tr>
+                                      <td> <button id="8" class="btn btn-danger btnFix" (click)="btnClick('8')"></button></td>
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button  id="9" class="btn btn-danger btnFix" (click)="btnClick('9')"></button></td>
+            
+                                      <td> <button  id="10" class="btn btn-danger btnFix" (click)="btnClick('10')"></button></td>
+                                      <td> <button style="visibility: hidden" id="5" class="btn btn-danger btnFix" (click)="btnClick('5')"></button></td>
+                                      <td> <button id="11" class="btn btn-danger btnFix" (click)="btnClick('11')"></button></td>
+                                    </tr>
+                                  <tr>
+                                      <td> <button id="12" class="btn btn-danger btnFix" (click)="btnClick('12')"></button></td>
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button  id="13" class="btn btn-danger btnFix" (click)="btnClick('13')"></button></td>
+            
+                                      <td> <button id="14" class="btn btn-danger btnFix" (click)="btnClick('14')"></button></td>
+                                      <td> <button style="visibility: hidden" id="5" class="btn btn-danger btnFix" (click)="btnClick('5')"></button></td>
+                                      <td> <button id="15" class="btn btn-danger btnFix" (click)="btnClick('15')"></button></td>
+                                    </tr>
+                                  <tr>
+                                      <td> <button id="16" class="btn btn-danger btnFix" (click)="btnClick('16')"></button></td>
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+            
+                                      <td> <button style="visibility: hidden" id="6" class="btn btn-danger btnFix" (click)="btnClick('6')"></button></td>
+                                      <td> <button style="visibility: hidden" id="5" class="btn btn-danger btnFix" (click)="btnClick('5')"></button></td>
+                                      <td> <button id="17" class="btn btn-danger btnFix" (click)="btnClick('17')"></button></td>
+                                    </tr>
+                                  <tr>
+                                      <td> <button id="18" class="btn btn-danger btnFix" (click)="btnClick('18')"></button></td>
+                                      <td> <button id="19" class="btn btn-danger btnFix" (click)="btnClick('19')"></button></td>
+                                      <td> <button id="20" class="btn btn-danger btnFix" (click)="btnClick('20')"></button></td>
+                                      <td> <button id="21" class="btn btn-danger btnFix" (click)="btnClick('21')"></button></td>
+                                      <td> <button id="22" class="btn btn-danger btnFix" (click)="btnClick('22')"></button></td>
+                                      <td> <button id="23" class="btn btn-danger btnFix" (click)="btnClick('23')"></button></td>
+                                    </tr>
+                                </table>
+                                  
+                                  <button class="btn btn-primary mt-3" (click)="saveSchedule()">Save schedule</button>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <select  class="custom-select" [(ngModel)]='slectedCompany' name="slectedCompany" >
+                                    <option *ngFor=" let company of companies" [value]="company">{{company}}</option>
+                                  </select> 
+
+                                  <button class="btn btn-dark mt-5" (click)="clear()">Clear</button>
+                            </div>
+                            </div>
+                   
+                    </div>
+                
+              
+              
+
+            </div>
+            <div *ngIf="flag" class="alert alert-success mt-2" role="alert">
+                Successfully saved schedule
+               </div>
         </div>
+       
+
     </div>
 </div>
     <br/>

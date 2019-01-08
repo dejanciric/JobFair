@@ -20,6 +20,8 @@ import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
 import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { CompanyOverviewComponent } from './company-overview/company-overview.component';
+import { NewJobfairComponent } from './new-jobfair/new-jobfair.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -42,7 +44,8 @@ const routes: Routes = [
   {path: 'hiring', component: HiringComponent},
   {path: 'companyRequests', component: CompanyRequestsComponent},
   {path: 'adminHome', component: AdminHomeComponent},
-
+  {path: 'companyOverview', component: CompanyOverviewComponent},
+  {path: 'newJobfair', component: NewJobfairComponent},
   {path: '', component: LoginComponent},
 ];
 

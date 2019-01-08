@@ -33,8 +33,14 @@ import Employed from './models/employed';
 import Package from './models/package';
 import CompanyRequest from './models/companyrequest';
 import Period from './models/period';
+import Schedule from './models/schedule';
+import Slot from './models/slot';
+import Jobfair from './models/jobfair';
+
+
 
 import { Request } from 'express-serve-static-core';
+import jobfair from './models/jobfair';
 
 interface FileRequest extends Request {
     file: any, // or any other type
@@ -493,6 +499,67 @@ router.route('/readAllRequests').post(
     }
 );
 
+router.route('/readAcceptedRequests').post(
+    (req, res)=>{
+       
+        CompanyRequest.find({"result":"Accepted"},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+router.route('/readAllSlots').get(
+    (req, res)=>{
+       
+        Slot.findOne({"companyName":"-1"},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+router.route('/readCompanySlots').post(
+    (req, res)=>{
+       let companyName = req.body.companyName;
+        Slot.findOne({"companyName":companyName},
+         (err,cr)=>{
+            if(err) console.log(err);
+            else res.json(cr);
+        })
+    }
+);
+
+router.route('/updateSlot').post(
+    (req, res)=>{
+        let companyName = req.body.companyName;
+        let slot = req.body.slot;
+        Slot.findOneAndUpdate({'companyName':companyName}, {'slot':slot}, (err)=>{
+            if (err){
+                res.send(err);
+               // console.log("error");
+            }
+    
+            else{
+                res.json({ message: 'Slot updated!'});
+                //console.log("alo");
+            }
+        })
+
+    }
+);
+
+router.route('/saveSlot').post((req, res)=>{
+    let slot = new Slot(req.body);
+    //console.log(packagee);
+    slot.save().
+        then(slot=>{
+            res.status(200).json({'slot':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'slot':'no'});
+        })
+});
+
 
 router.route('/saveRequest').post((req, res)=>{
     let cr = new CompanyRequest(req.body);
@@ -587,6 +654,79 @@ router.route('/updatePeriods').post(
     }
 );
 
+router.route('/readSchedule').get(
+    (req, res)=>{
+
+        Schedule.findOne({},
+         (err,s)=>{
+            if(err) console.log(err);
+            else res.json(s);
+        })
+    }
+);
+
+router.route('/saveSchedule').post(
+    (req, res)=>{
+        let companies = req.body.companies;
+        Schedule.findOneAndUpdate({}, {'companies':companies}, (err)=>{
+            if (err){
+                res.send(err);
+               // console.log("error");
+            }
+    
+            else{
+                res.json({ message: 'Schedule updated!'});
+                //console.log("alo");
+            }
+        })
+
+    }
+);
+
+router.route('/saveNewSlot').post((req, res)=>{
+    let slot = new Slot(req.body);
+    //console.log(packagee);
+    slot.save().
+        then(slot=>{
+            res.status(200).json({'slot':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'slot':'no'});
+        })
+});
+
+router.route('/saveJobfair').post((req, res)=>{
+    let jobfair = new Jobfair(req.body);
+    //console.log(packagee);
+    jobfair.save().
+        then(jobfair=>{
+            res.status(200).json({'jobfair':'ok'});
+        }).catch(err=>{
+            res.status(400).json({'jobfair':'no'});
+        })
+});
+
+router.route('/getJobfair').get(
+    (req, res)=>{
+
+        Jobfair.findOne({},
+         (err,s)=>{
+            if(err) console.log(err);
+            else res.json(s);
+        })
+    }
+);
+
+router.route('/deleteJobfair').get((req, res)=>{
+
+    Jobfair.deleteMany({},(err)=>{
+        if(err) console.log(err);
+        else{
+            res.json({ message: 'Jobfair Deleted!'});
+           
+        }
+    })
+    
+});
 
 
 app.use('/', router);

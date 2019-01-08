@@ -22,7 +22,7 @@ export class CompanyComponent implements OnInit {
 
   image:String="";
 
-  id:String="";
+  id:String="0";
   file:File;
   success=false;
 
@@ -41,7 +41,7 @@ export class CompanyComponent implements OnInit {
   publish(){
     
     this.service.findAllOffers().subscribe((offers:Offer[])=>{
-      if (offers){
+      if (offers.length > 0){
         this.id = offers[offers.length-1].id;
       }
       let tmp = +this.id;

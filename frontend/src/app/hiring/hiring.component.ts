@@ -35,9 +35,11 @@ export class HiringComponent implements OnInit {
       while (i >= 0){//proveriti dal je istekao
         if (this.offers[i].students.length> 0 && this.offers[i].students[0].result!='TBA'){
           this.offers.splice(i,1);
+          i--;
+          continue;
         }
         this.deadline = this.offers[i].deadline;
-        if(this.expired()){
+        if(!this.expired()){
           this.offers.splice(i,1);
         }
         i--;
@@ -59,8 +61,7 @@ export class HiringComponent implements OnInit {
 
   finish(){
     this.service.applyToOffer(this.currOfferId, this.students).subscribe(()=>{
-      this.flag = false;
-      this.currOfferId = "-1";
+      this.ngOnInit();
     })
   }
 

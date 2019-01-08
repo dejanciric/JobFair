@@ -61,6 +61,8 @@ export class ResultsComponent implements OnInit {
           while (i >= 0){
             if (this.offers[i].students.length> 0 && this.offers[i].students[0].result=='TBA'){
               this.offers.splice(i,1);
+              i--;
+              continue;
             }
             this.deadline = this.offers[i].deadline;
             if(!this.expired()){
