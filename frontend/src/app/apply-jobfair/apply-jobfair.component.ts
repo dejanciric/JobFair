@@ -5,6 +5,7 @@ import { UsersService } from '../users.service';
 import { Prilog2 } from '../prilog2.model';
 import { CompanyService } from '../company.service';
 import { Period } from '../periods.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apply-jobfair',
@@ -26,17 +27,28 @@ export class ApplyJobfairComponent implements OnInit {
   alreadyApplied=false;
   image:String="";
   disable=false;
-  constructor(private service:UsersService, private companyService:CompanyService) { }
+  constructor(private service:UsersService, private companyService:CompanyService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="company"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
       this.flag = false;
       this.image = this.service.getImage();
       let currDate = new Date();
       this.service.readPeriods().subscribe((p:Period)=>{
-        let f:string[] = p.studentsFrom.split("/");
+        let f:string[] = p.companiesFrom.split("/");
         let from = new Date(+f[2],+f[1]-1, +f[0]);
     
-        let t:string[] = p.studentsTo.split("/");
+        let t:string[] = p.companiesTo.split("/");
         let to = new Date(+t[2],+t[1]-1, +t[0]);
     
         if (currDate >= from && currDate <=  to)
@@ -139,5 +151,8 @@ ok(){
     this.ngOnInit();
   })
 }
-
+logout(){
+  sessionStorage.clear();
+  this.router.navigate(['/login']);
+}
 }

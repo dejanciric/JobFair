@@ -25,7 +25,6 @@ import { ResultsComponent } from './results/results.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HiringComponent } from './hiring/hiring.component';
 import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
-import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { CompanyOverviewComponent } from './company-overview/company-overview.component';
@@ -56,7 +55,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ResultsComponent,
     HiringComponent,
     ApplyJobfairComponent,
-    ResultsCompanyComponent,
     CompanyRequestsComponent,
     AdminHomeComponent,
     CompanyOverviewComponent,

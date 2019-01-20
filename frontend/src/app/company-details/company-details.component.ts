@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-details',
@@ -27,9 +28,17 @@ export class CompanyDetailsComponent implements OnInit {
   imageuser:String="";
 
   updatePath = "http://localhost:4000/uploads/";
-  constructor(private service:CompanyService, private userService:UsersService) { }
+  constructor(private service:CompanyService, private userService:UsersService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+
+        this.userService.loggedUsername= sessionStorage.getItem("username");
+        this.userService.user = true;
+        this.userService.loggedImage = sessionStorage.getItem("image");
+      
+    } 
+
     this.imageuser=this.userService.getImage();
   
     this.companyName = this.service.companyName;
@@ -50,5 +59,8 @@ export class CompanyDetailsComponent implements OnInit {
      this.service.companyImage = user.image;
     })
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

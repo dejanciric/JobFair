@@ -24,6 +24,17 @@ export class AdminComponent implements OnInit {
   constructor(private router:Router, private service:UsersService) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="admin"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.image = this.service.getImage();
 
     this.flag = false;
@@ -112,5 +123,8 @@ export class AdminComponent implements OnInit {
     })
 
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

@@ -33,6 +33,17 @@ export class ResultsComponent implements OnInit {
   constructor(private service: UsersService, private router: Router, private companyService:CompanyService) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="student"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.currOfferId="-1";
     this.flag = false;
     this.image= this.service.getImage();
@@ -175,5 +186,8 @@ export class ResultsComponent implements OnInit {
     return false;
   }
 
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

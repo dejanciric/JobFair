@@ -28,6 +28,15 @@ export class OfferDetailComponent implements OnInit {
   constructor(private service:CompanyService, private router:Router, private userService:UsersService) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+
+        this.userService.loggedUsername= sessionStorage.getItem("username");
+        this.userService.user = true;
+        this.userService.loggedImage = sessionStorage.getItem("image");
+        this.service.selectedOfferId = sessionStorage.getItem("offerid");
+      
+    }
+    
     this.image=this.userService.getImage();
     this.currDate=this.getCurrDate();
 
@@ -89,5 +98,8 @@ export class OfferDetailComponent implements OnInit {
     return false;
   }
 
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

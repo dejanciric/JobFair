@@ -23,6 +23,17 @@ export class CompanyOverviewComponent implements OnInit {
   constructor(private service:UsersService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="admin"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.image = this.service.getImage();
     this.flag=false;
     this.service.readAcceptedRequests().subscribe((cr:{"companyName":String, "title":String, "result":String, "comment":String}[])=>{
@@ -71,5 +82,8 @@ export class CompanyOverviewComponent implements OnInit {
   func(companyName){
     this.router.navigate(['/companyDetails']);
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

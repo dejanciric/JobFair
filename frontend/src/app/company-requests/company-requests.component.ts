@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-requests',
@@ -15,9 +16,20 @@ export class CompanyRequestsComponent implements OnInit {
 
   schedule:String[]=[];
   
-  constructor(private service:UsersService) { }
+  constructor(private service:UsersService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="admin"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.flag = false;
     this.image = this.service.getImage();
     this.companies = [];
@@ -75,5 +87,8 @@ export class CompanyRequestsComponent implements OnInit {
       this.schedule[i] = "";
     }
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

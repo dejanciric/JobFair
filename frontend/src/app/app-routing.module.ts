@@ -17,7 +17,6 @@ import { ApplyComponent } from './apply/apply.component';
 import { ResultsComponent } from './results/results.component';
 import { HiringComponent } from './hiring/hiring.component';
 import { ApplyJobfairComponent } from './apply-jobfair/apply-jobfair.component';
-import { ResultsCompanyComponent } from './results-company/results-company.component';
 import { CompanyRequestsComponent } from './company-requests/company-requests.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { CompanyOverviewComponent } from './company-overview/company-overview.component';
@@ -39,7 +38,6 @@ const routes: Routes = [
   {path: 'studentOffers', component: StudentOffersComponent},
   {path: 'apply', component: ApplyComponent},
   {path: 'results', component: ResultsComponent},
-  {path: 'resultsCompany', component: ResultsCompanyComponent},
   {path: 'applyJobfair', component: ApplyJobfairComponent},
   {path: 'hiring', component: HiringComponent},
   {path: 'companyRequests', component: CompanyRequestsComponent},

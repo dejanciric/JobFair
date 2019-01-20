@@ -4,6 +4,8 @@ import { Work } from '../work.model';
 import { UsersService } from '../users.service';
 import { CV } from '../cv.model';
 import { Period } from '../periods.model';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -62,9 +64,20 @@ export class StudentComponent implements OnInit {
 
   disable=false;
 
-  constructor(private service: UsersService) { }
+  constructor(private service: UsersService, private router:Router) { }
 
   ngOnInit() {
+      if (sessionStorage.length > 0){
+        if(sessionStorage.getItem("type")!="student"){
+          this.router.navigate(['/login']);
+        }else{
+          this.service.loggedUsername= sessionStorage.getItem("username");
+          this.service.user = true;
+          this.service.loggedImage = sessionStorage.getItem("image");
+        }
+      }else{
+        this.router.navigate(['/login']);
+      }
     this.image = this.service.getImage();
     let currDate = new Date();
     this.service.readPeriods().subscribe((p:Period)=>{
@@ -272,6 +285,11 @@ export class StudentComponent implements OnInit {
       return false;
     })
 
+  }
+
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 

@@ -20,6 +20,13 @@ export class OffersComponent implements OnInit {
   constructor(private service: CompanyService, private router:Router, private userService: UsersService) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+
+        this.userService.loggedUsername= sessionStorage.getItem("username");
+        this.userService.user = true;
+        this.userService.loggedImage = sessionStorage.getItem("image");
+      
+    }
     this.imageuser=this.userService.getImage();
     this.companyName = this.service.companyName;
     this.image = this.updatePath+this.service.companyImage;
@@ -29,8 +36,16 @@ export class OffersComponent implements OnInit {
   }
 
   test(id){
-    this.service.selectedOfferId = id;
-    this.router.navigate(['/offerDetails']);
+    if (this.userService.user){
+      this.service.selectedOfferId = id;
+      sessionStorage.setItem("offerid", id);
+      this.router.navigate(['/offerDetails']);
+    }
+
   }
 
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

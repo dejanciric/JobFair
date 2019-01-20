@@ -21,7 +21,16 @@ export class GuestComponent implements OnInit {
   constructor(private service: CompanyService, private router:Router, private userService:UsersService) { }
 
   ngOnInit() {
-
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="student"){
+        this.router.navigate(['/login']);
+      }else{
+        this.userService.loggedUsername= sessionStorage.getItem("username");
+        this.userService.user = true;
+        this.userService.loggedImage = sessionStorage.getItem("image");
+      }
+    }
+    
     this.image=this.userService.getImage();
     this.search();
   }
@@ -38,5 +47,8 @@ export class GuestComponent implements OnInit {
       this.companies = companies;
     })
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

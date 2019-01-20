@@ -68,8 +68,8 @@ router.route('/searchCompany').post(
         let city = req.body.city;
         let works:String[] = req.body.work;
 
-        var regexName = new RegExp('.*'+companyName+'.*');
-        var regexCity = new RegExp('.*'+city + '.*');
+        var regexName = new RegExp('.*'+companyName+'.*', 'i');
+        var regexCity = new RegExp('.*'+city + '.*','i');
         if (works != null &&  works!=undefined && works.length != 0){
             User.find({"companyName": regexName, "city":regexCity,"type":"company", "work":{$in:works}},
             (err,user)=>{

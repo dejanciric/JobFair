@@ -29,8 +29,21 @@ export class CompanyComponent implements OnInit {
   constructor(private service:UsersService, private router:Router, private companyService:CompanyService) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="company"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.image=this.service.getImage();
     this.companyUsername = this.service.loggedUsername;
+
+    
 
     this.service.findByUsername(this.companyUsername).subscribe((user:User)=>{
       this.companyName = user.companyName;
@@ -65,5 +78,8 @@ export class CompanyComponent implements OnInit {
     this.file = event.target.files[0];
     //this.service.uploadFile(selectedFile);
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

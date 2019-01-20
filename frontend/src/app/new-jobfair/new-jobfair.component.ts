@@ -3,6 +3,7 @@ import { UsersService } from '../users.service';
 import { Jobfair } from '../jobfair.model';
 import { Package } from '../package.model';
 import { Additional } from '../additional.model';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class NewJobfairComponent implements OnInit {
     additionals:Additional[]=[];
 
     allslots:String[];
-    constructor(private service:UsersService) { }
+    constructor(private service:UsersService, private router: Router) { }
 
 
   jobfairTitle:String="";
@@ -43,6 +44,17 @@ export class NewJobfairComponent implements OnInit {
   endTime:String="";
   place:String="";
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="admin"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.message="";
     this.message2="";
     this.image = this.service.getImage();
@@ -209,5 +221,8 @@ export class NewJobfairComponent implements OnInit {
       })
     })
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

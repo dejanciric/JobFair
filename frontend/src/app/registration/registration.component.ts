@@ -179,5 +179,8 @@ export class RegistrationComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     //this.service.uploadFile(selectedFile);
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

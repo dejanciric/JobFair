@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Period } from '../periods.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -15,9 +16,21 @@ export class AdminHomeComponent implements OnInit {
   success= false;
 
 
-  constructor(private service:UsersService) { }
+  constructor(private service:UsersService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="admin"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
+    
     this.success = false;
     this.image = this.service.getImage();
 
@@ -87,5 +100,8 @@ export class AdminHomeComponent implements OnInit {
         this.success=true;
       })
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

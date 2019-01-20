@@ -24,6 +24,17 @@ export class HiringComponent implements OnInit {
   constructor(private service:UsersService, private router:Router) { }
 
   ngOnInit() {
+    if (sessionStorage.length > 0){
+      if(sessionStorage.getItem("type")!="company"){
+        this.router.navigate(['/login']);
+      }else{
+        this.service.loggedUsername= sessionStorage.getItem("username");
+        this.service.user = true;
+        this.service.loggedImage = sessionStorage.getItem("image");
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
     this.currDate=this.getCurrDate();
     this.image=this.service.getImage();
 
@@ -95,5 +106,8 @@ export class HiringComponent implements OnInit {
 
     return  ddd + '/' + mmm  + '/' + yyyy;
   }
-
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }
