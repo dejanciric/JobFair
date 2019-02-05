@@ -1,6 +1,6 @@
 # [JobFair]
 
-Programming Internet applications course project
+Programming Internet Applications course project <\br>
 Frontend and Backend
 
 ## Built With
